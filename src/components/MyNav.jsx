@@ -18,7 +18,7 @@ function MyNav() {
           </Col>
           {location.pathname !== "/login" &&
             location.pathname !== "/register" &&
-            location.pathname !== "/annunci/:id" && (
+            !location.pathname.includes("/annunci/") && (
               <Col sm={5} className="d-none d-lg-block">
                 <Form className="d-flex mt-4 position-relative">
                   <Form.Control type="search" placeholder="Cerca" className="" aria-label="Search" />

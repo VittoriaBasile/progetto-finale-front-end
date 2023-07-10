@@ -64,3 +64,42 @@
   overflow-y: hidden;
   padding: 2px;
 }
+
+.icona-dettaglio {
+  width: 100px;
+  fill: lightslategrey;
+}
+.icona-dettaglio-posti-letto {
+  width: 32px;
+  fill: lightslategrey;
+}
+.icona-dettaglio-servizi {
+  width: 32px;
+  fill: lightslategrey;
+}
+.valutazione-stelle {
+  font-size: 40px;
+  cursor: pointer;
+}
+
+.stella-piena::before {
+  content: "★";
+  color: gold;
+  transition: color 0.2s;
+}
+
+.stella-vuota::before {
+  content: "☆";
+  color: lightgray;
+  transition: color 0.2s;
+}
+
+.stella-piena,
+.stella-piena.selected {
+  color: yellow;
+  filter: drop-shadow(0 0 10px yellow);
+}
+.stella-piena-card::before {
+  content: "★";
+  color: black;
+}

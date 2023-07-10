@@ -4,7 +4,15 @@ export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
-
+export const aggiungiValutazioneAction = (annuncioId, punteggio) => {
+  return {
+    type: "valutazione/AGGIUNGI_VALUTAZIONE",
+    payload: {
+      annuncioId,
+      punteggio,
+    },
+  };
+};
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:3001/users/me";
@@ -17,7 +25,7 @@ export const getUserLoggedAction = () => {
       });
       if (resp.ok) {
         let data = await resp.json();
-
+        localStorage.setItem("email", data.email);
         dispatch({ type: GET_USER_LOGGED, payload: data });
       }
     } catch (error) {
