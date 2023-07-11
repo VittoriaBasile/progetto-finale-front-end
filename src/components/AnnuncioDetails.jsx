@@ -15,6 +15,7 @@ import Riscaldamento from "../assets/svgServizi/Riscaldamento.svg";
 import SelfCheckIn from "../assets/svgServizi/SelfCheckIn.svg";
 import Tv from "../assets/svgServizi/Tv.svg";
 import WiFi from "../assets/svgServizi/WiFi.svg";
+import CommentArea from "./CommentArea";
 
 const AnnuncioDetails = () => {
   const servizioSvg = {
@@ -37,34 +38,19 @@ const AnnuncioDetails = () => {
     WI_FI: { src: WiFi, className: "icona-dettaglio-servizi me-2 " },
   };
 
-  const valutazioni = useSelector((state) => state.valutazione);
+  const formatNomeAnnuncio = (nome) => {
+    return nome.replaceAll("-", " ");
+  };
+  const annuncio = useSelector((state) => state.home.annuncio);
+
   const dispatch = useDispatch();
   const params = useParams();
-
-  const [valutazione, setValutazione] = useState(0);
 
   useEffect(() => {
     const url = `http://localhost:3001/annunci/${params.id}`;
     dispatch(getDettagioAction(url));
-  }, [dispatch, params.id]);
+  }, [params.id]);
 
-  const annuncio = useSelector((state) => state.home.annuncio);
-
-  const formatNomeAnnuncio = (nome) => {
-    return nome.replaceAll("-", " ");
-  };
-
-  const handleSubmitValutazione = (valutazione) => {
-    const token = localStorage.getItem("token");
-    const email = localStorage.getItem("email");
-    const payload = {
-      valore: valutazione,
-      userEmail: email,
-      nomeAnnuncio: annuncio.nome,
-    };
-
-    dispatch(aggiungiValutazioneAction(annuncio.id, payload));
-  };
   return (
     <>
       {annuncio != null && (
@@ -175,51 +161,7 @@ const AnnuncioDetails = () => {
                   </div>
                 </div>
               </Row>
-              <>
-                {/* ... */}
-                <Row>
-                  <Col>
-                    <h4>Valutazione</h4>
-                    <div className="valutazione-stelle">
-                      <span
-                        className={`${valutazione >= 1 || valutazioni.includes(1) ? "stella-piena" : "stella-vuota"}`}
-                        onClick={() => {
-                          setValutazione(1);
-                          dispatch(aggiungiValutazioneAction(annuncio.id, 1));
-                        }}
-                      ></span>
-                      <span
-                        className={`${valutazione >= 2 || valutazioni.includes(2) ? "stella-piena" : "stella-vuota"}`}
-                        onClick={() => {
-                          setValutazione(2);
-                          dispatch(aggiungiValutazioneAction(annuncio.id, 2));
-                        }}
-                      ></span>
-                      <span
-                        className={`${valutazione >= 3 || valutazioni.includes(3) ? "stella-piena" : "stella-vuota"}`}
-                        onClick={() => {
-                          setValutazione(3);
-                          dispatch(aggiungiValutazioneAction(annuncio.id, 3));
-                        }}
-                      ></span>
-                      <span
-                        className={`${valutazione >= 4 || valutazioni.includes(4) ? "stella-piena" : "stella-vuota"}`}
-                        onClick={() => {
-                          setValutazione(4);
-                          dispatch(aggiungiValutazioneAction(annuncio.id, 4));
-                        }}
-                      ></span>
-                      <span
-                        className={`${valutazione >= 5 || valutazioni.includes(5) ? "stella-piena" : "stella-vuota"}`}
-                        onClick={() => {
-                          setValutazione(5);
-                          dispatch(aggiungiValutazioneAction(annuncio.id, 5));
-                        }}
-                      ></span>
-                    </div>
-                  </Col>
-                </Row>
-              </>
+              <CommentArea annuncio={annuncio} />
             </Row>
           </Container>
         </>

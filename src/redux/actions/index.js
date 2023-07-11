@@ -13,6 +13,7 @@ export const aggiungiValutazioneAction = (annuncioId, punteggio) => {
     },
   };
 };
+
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:3001/users/me";
