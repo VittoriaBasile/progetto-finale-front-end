@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { aggiungiValutazioneAction } from "../redux/actions";
+import Commenti from "./Commenti";
 
 const CommentArea = ({ annuncio }) => {
   const dispatch = useDispatch();
@@ -69,7 +70,9 @@ const CommentArea = ({ annuncio }) => {
         <Col>
           <h4>Valutazione</h4>
 
-          <div className="valutazione-stelle">
+          <div className="valutazione-stelle d-flex align-items-center mb-4">
+            <span className="fs-4 me-3 fw-light">Invia la tua valutazione:</span>
+
             <span
               className={`${valutazione >= 1 || valutazioni.includes(1) ? "stella-piena" : "stella-vuota"}`}
               onClick={(e) => {
@@ -112,6 +115,9 @@ const CommentArea = ({ annuncio }) => {
             ></span>
           </div>
         </Col>
+      </Row>
+      <Row>
+        <Commenti annuncio={annuncio} />
       </Row>
     </>
   );

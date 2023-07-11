@@ -103,3 +103,14 @@
   content: "★";
   color: black;
 }
+
+.icona-commenti {
+  width: 74px;
+  fill: lightgray;
+}
+.commento-details {
+  line-height: 10px;
+}
+.card-commenti {
+  height: 200px;
+}

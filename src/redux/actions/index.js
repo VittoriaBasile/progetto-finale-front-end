@@ -76,3 +76,25 @@ export const getDettagioAction = (url) => {
     }
   };
 };
+
+export const getCommentiAction = (nomeAnnuncio) => {
+  const url = `http://localhost:3001/commenti/nomeAnnuncio?nomeAnnuncio=${nomeAnnuncio}`;
+  const token = localStorage.getItem("token");
+  console.log(token);
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let commenti = await resp.json();
+
+        dispatch({ type: GET_COMMENTI, payload: commenti });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
