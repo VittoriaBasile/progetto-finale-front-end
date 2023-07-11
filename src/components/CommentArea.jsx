@@ -1,17 +1,28 @@
-import { useState } from "react";
-import { Alert, Col, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { aggiungiValutazioneAction } from "../redux/actions";
 
 const CommentArea = ({ annuncio }) => {
   const dispatch = useDispatch();
   const valutazioni = useSelector((state) => state.valutazione);
+
   const [valutazione, setValutazione] = useState(0);
-  const [stelleRiempite, setStelleRiempite] = useState(0);
   const [valutazioneInviata, setValutazioneInviata] = useState(false);
 
   const token = localStorage.getItem("token");
   const email = localStorage.getItem("email");
+
+  const userValutazione = valutazioni.find((val) => val.userEmail === email && val.annuncioId === annuncio.id);
+
+  useEffect(() => {
+    if (userValutazione) {
+      setValutazione(userValutazione.punteggio);
+    } else {
+      setValutazione(0);
+    }
+  }, [userValutazione]);
+
   let payload = {
     valore: valutazione,
     userEmail: email,
@@ -43,7 +54,8 @@ const CommentArea = ({ annuncio }) => {
         },
       });
       if (response.ok) {
-        dispatch(aggiungiValutazioneAction(annuncio.id, valutazione));
+        dispatch(aggiungiValutazioneAction(email, annuncio.id, updatedValutazione));
+
         setValutazioneInviata(true);
       }
     } catch (error) {
@@ -61,8 +73,7 @@ const CommentArea = ({ annuncio }) => {
             <span
               className={`${valutazione >= 1 || valutazioni.includes(1) ? "stella-piena" : "stella-vuota"}`}
               onClick={(e) => {
-                if (!valutazioneInviata) {
-                  setStelleRiempite(1);
+                if (!valutazioneInviata && !userValutazione) {
                   sendValutazione(e, 1);
                 }
               }}
@@ -70,8 +81,7 @@ const CommentArea = ({ annuncio }) => {
             <span
               className={`${valutazione >= 2 || valutazioni.includes(2) ? "stella-piena" : "stella-vuota"}`}
               onClick={(e) => {
-                if (!valutazioneInviata) {
-                  setStelleRiempite(2);
+                if (!valutazioneInviata && !userValutazione) {
                   sendValutazione(e, 2);
                 }
               }}
@@ -79,8 +89,7 @@ const CommentArea = ({ annuncio }) => {
             <span
               className={`${valutazione >= 3 || valutazioni.includes(3) ? "stella-piena" : "stella-vuota"}`}
               onClick={(e) => {
-                if (!valutazioneInviata) {
-                  setStelleRiempite(3);
+                if (!valutazioneInviata && !userValutazione) {
                   sendValutazione(e, 3);
                 }
               }}
@@ -88,8 +97,7 @@ const CommentArea = ({ annuncio }) => {
             <span
               className={`${valutazione >= 4 || valutazioni.includes(4) ? "stella-piena" : "stella-vuota"}`}
               onClick={(e) => {
-                if (!valutazioneInviata) {
-                  setStelleRiempite(4);
+                if (!valutazioneInviata && !userValutazione) {
                   sendValutazione(e, 4);
                 }
               }}
@@ -97,8 +105,7 @@ const CommentArea = ({ annuncio }) => {
             <span
               className={`${valutazione >= 5 || valutazioni.includes(5) ? "stella-piena" : "stella-vuota"}`}
               onClick={(e) => {
-                if (!valutazioneInviata) {
-                  setStelleRiempite(5);
+                if (!valutazioneInviata && !userValutazione) {
                   sendValutazione(e, 5);
                 }
               }}

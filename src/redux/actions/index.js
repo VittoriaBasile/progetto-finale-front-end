@@ -4,10 +4,11 @@ export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
-export const aggiungiValutazioneAction = (annuncioId, punteggio) => {
+export const aggiungiValutazioneAction = (userEmail, annuncioId, punteggio) => {
   return {
     type: "valutazione/AGGIUNGI_VALUTAZIONE",
     payload: {
+      userEmail,
       annuncioId,
       punteggio,
     },
