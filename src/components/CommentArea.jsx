@@ -25,13 +25,7 @@ const CommentArea = ({ annuncio }) => {
     }
   }, [userValutazione]);
 
-  let payload = {
-    valore: valutazione,
-    userEmail: email,
-    nomeAnnuncio: annuncio.nome,
-  };
-
-  const sendValutazione = async (e, numero) => {
+  const sendValutazione = (e, numero) => {
     e.preventDefault();
 
     if (valutazioneInviata) {
@@ -39,85 +33,95 @@ const CommentArea = ({ annuncio }) => {
       return;
     }
 
-    const updatedValutazione = numero;
-    setValutazione(updatedValutazione);
+    let payload = {
+      valore: numero,
+      userEmail: email,
+      nomeAnnuncio: annuncio.nome,
+    };
 
-    const urlValutazione = `http://localhost:3001/valutazioni`;
-    try {
-      const response = await fetch(urlValutazione, {
-        method: "POST",
-        body: JSON.stringify({
-          ...payload,
-          valore: updatedValutazione,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      if (response.ok) {
-        dispatch(aggiungiValutazioneAction(email, annuncio.id, updatedValutazione));
-
+    setValutazione(numero);
+    dispatch(aggiungiValutazioneAction(payload))
+      .then(() => {
         setValutazioneInviata(true);
-      }
-    } catch (error) {
-      alert(error);
-    }
+      })
+      .catch((error) => {
+        alert(error);
+      });
   };
+  const filteredValutazione = valutazioni.find(
+    (val) => val.annuncio?.nome === annuncio.nome && val.user?.email === email
+  );
 
   return (
     <>
       <Row>
         <h4>Valutazione</h4>
       </Row>
-      <Row>
-        <Col>
-          <div className="valutazione-stelle d-flex align-items-center mb-4">
-            <span className="fs-4 me-3 fw-light">Invia la tua valutazione:</span>
 
-            <span
-              className={`${valutazione >= 1 || valutazioni.includes(1) ? "stella-piena" : "stella-vuota"}`}
-              onClick={(e) => {
-                if (!valutazioneInviata && !userValutazione) {
-                  sendValutazione(e, 1);
-                }
-              }}
-            ></span>
-            <span
-              className={`${valutazione >= 2 || valutazioni.includes(2) ? "stella-piena" : "stella-vuota"}`}
-              onClick={(e) => {
-                if (!valutazioneInviata && !userValutazione) {
-                  sendValutazione(e, 2);
-                }
-              }}
-            ></span>
-            <span
-              className={`${valutazione >= 3 || valutazioni.includes(3) ? "stella-piena" : "stella-vuota"}`}
-              onClick={(e) => {
-                if (!valutazioneInviata && !userValutazione) {
-                  sendValutazione(e, 3);
-                }
-              }}
-            ></span>
-            <span
-              className={`${valutazione >= 4 || valutazioni.includes(4) ? "stella-piena" : "stella-vuota"}`}
-              onClick={(e) => {
-                if (!valutazioneInviata && !userValutazione) {
-                  sendValutazione(e, 4);
-                }
-              }}
-            ></span>
-            <span
-              className={`${valutazione >= 5 || valutazioni.includes(5) ? "stella-piena" : "stella-vuota"}`}
-              onClick={(e) => {
-                if (!valutazioneInviata && !userValutazione) {
-                  sendValutazione(e, 5);
-                }
-              }}
-            ></span>
-          </div>
-        </Col>
-      </Row>
+      {filteredValutazione ? (
+        <Row>
+          <Col>
+            <div className="valutazione-stelle d-flex align-items-center mb-4">
+              {Array.from({ length: filteredValutazione.valore }, (_, index) => (
+                <span key={index} className="stella-piena"></span>
+              ))}
+              {Array.from({ length: 5 - filteredValutazione.valore }, (_, index) => (
+                <span key={index + filteredValutazione.valore} className="stella-vuota"></span>
+              ))}
+            </div>
+          </Col>
+        </Row>
+      ) : (
+        <Row>
+          <Col>
+            <div className="valutazione-stelle d-flex align-items-center mb-4">
+              <span className="fs-4 me-3 fw-light">Invia la tua valutazione:</span>
+
+              <span
+                className={`${valutazione >= 1 || valutazioni?.includes(1) ? "stella-piena" : "stella-vuota"}`}
+                onClick={(e) => {
+                  if (!valutazioneInviata && !userValutazione) {
+                    sendValutazione(e, 1);
+                  }
+                }}
+              ></span>
+              <span
+                className={`${valutazione >= 2 || valutazioni?.includes(2) ? "stella-piena" : "stella-vuota"}`}
+                onClick={(e) => {
+                  if (!valutazioneInviata && !userValutazione) {
+                    sendValutazione(e, 2);
+                  }
+                }}
+              ></span>
+              <span
+                className={`${valutazione >= 3 || valutazioni?.includes(3) ? "stella-piena" : "stella-vuota"}`}
+                onClick={(e) => {
+                  if (!valutazioneInviata && !userValutazione) {
+                    sendValutazione(e, 3);
+                  }
+                }}
+              ></span>
+              <span
+                className={`${valutazione >= 4 || valutazioni?.includes(4) ? "stella-piena" : "stella-vuota"}`}
+                onClick={(e) => {
+                  if (!valutazioneInviata && !userValutazione) {
+                    sendValutazione(e, 4);
+                  }
+                }}
+              ></span>
+              <span
+                className={`${valutazione >= 5 || valutazioni?.includes(5) ? "stella-piena" : "stella-vuota"}`}
+                onClick={(e) => {
+                  if (!valutazioneInviata && !userValutazione) {
+                    sendValutazione(e, 5);
+                  }
+                }}
+              ></span>
+            </div>
+          </Col>
+        </Row>
+      )}
+
       <Row>
         <MyCommento annuncio={annuncio} />
       </Row>

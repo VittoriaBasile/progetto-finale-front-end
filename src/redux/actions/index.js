@@ -5,14 +5,33 @@ export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
 export const ADD_COMMENTO = "ADD_COMMENTO";
-export const aggiungiValutazioneAction = (userEmail, annuncioId, punteggio) => {
-  return {
-    type: "valutazione/AGGIUNGI_VALUTAZIONE",
-    payload: {
-      userEmail,
-      annuncioId,
-      punteggio,
-    },
+
+export const aggiungiValutazioneAction = (payload) => {
+  return async (dispatch) => {
+    const urlValutazione = `http://localhost:3001/valutazioni`;
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(urlValutazione, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const valutazione = await response.json();
+        console.log(valutazione);
+        dispatch({
+          type: "valutazione/AGGIUNGI_VALUTAZIONE",
+          payload: valutazione,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -90,8 +109,13 @@ export const getCommentiAction = (nomeAnnuncio) => {
       });
       if (resp.ok) {
         let commenti = await resp.json();
-
+        if (commenti.length === 0) {
+          commenti = [];
+        }
+        console.log(commenti);
         dispatch({ type: GET_COMMENTI, payload: commenti });
+      } else if (resp.status === 404) {
+        dispatch({ type: GET_COMMENTI, payload: [] });
       }
     } catch (error) {
       console.log(error);
