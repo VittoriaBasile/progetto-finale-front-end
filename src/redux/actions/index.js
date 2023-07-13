@@ -7,6 +7,7 @@ export const GET_COMMENTI = "GET_COMMENTI";
 export const ADD_COMMENTO = "ADD_COMMENTO";
 export const GET_VALUTAZIONI = "GET_VALUTAZIONI";
 export const GET_VALUTAZIONE = "GET_VALUTAZIONE";
+export const GET_VALUTAZIONE_MEDIA = "GET_VALUTAZIONE_MEDIA";
 
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {

@@ -2,36 +2,42 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import VillaAnna1 from "../assets/VillaAnna/VillaAnna1.jpg";
 import { useDispatch, useSelector } from "react-redux";
-import { createSelector } from "reselect";
 import { useEffect, useState } from "react";
-import { getValutazioniPerAnnuncioAction } from "../redux/actions";
+import { getMediaValutazionePerAnnuncioAction, getValutazioniPerAnnuncioAction } from "../redux/actions";
 
 const Annuncio = ({ annuncio }) => {
   const dispatch = useDispatch();
-  const [valutazioni, setValutazioni] = useState([]);
+  const [valutazioneMediaPerAnnuncio, setValutazioneMediaPerAnnuncio] = useState(0);
 
   const formattedTipologia = annuncio.tipologia.replace(/_/g, " ");
   const formattedNome = annuncio.nome.replace(/-/g, " ");
 
-  useEffect(() => {
-    const fetchValutazioni = async () => {
+  const getMediaValutazionePerAnnuncioAction = () => {
+    return async (dispatch) => {
+      const urlValutazione = `http://localhost:3001/valutazioni/nome?nome=${annuncio.nome}`;
+      const token = localStorage.getItem("token");
+
       try {
-        const response = await dispatch(getValutazioniPerAnnuncioAction(annuncio.nome));
-        const valutazioniData = await response.json();
-        setValutazioni(valutazioniData);
+        const response = await fetch(urlValutazione, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          const media = await response.json();
+          setValutazioneMediaPerAnnuncio(media);
+        }
       } catch (error) {
         console.log(error);
       }
     };
+  };
 
-    fetchValutazioni();
+  useEffect(() => {
+    dispatch(getMediaValutazionePerAnnuncioAction(annuncio.nome));
   }, [annuncio.nome, dispatch]);
-
-  const filteredValutazioni = valutazioni.filter((valutazione) => valutazione.annuncio?.nome === annuncio.nome);
-  const mediaValutazioni =
-    filteredValutazioni.length > 0
-      ? filteredValutazioni.reduce((total, valutazione) => total + valutazione.valore, 0) / filteredValutazioni.length
-      : 0;
 
   return (
     <Link className="text-decoration-none text-dark" to={`/annunci/${annuncio.id}`}>
@@ -42,7 +48,7 @@ const Annuncio = ({ annuncio }) => {
             {formattedNome}, {annuncio.indirizzo.stato}
           </Card.Title>
           <Card.Text className="fs-6">Host {annuncio.user.name}</Card.Text>
-          <Card.Text className="stella-piena-card">{mediaValutazioni}</Card.Text>
+          <Card.Text className="stella-piena-card">{valutazioneMediaPerAnnuncio}</Card.Text>
           <Card.Text className="fs-6 fw-light">{formattedTipologia}</Card.Text>
           <Card.Text>
             <strong>{annuncio.prezzo}</strong>€ a notte{" "}
