@@ -1,10 +1,9 @@
-import { GET_ANNUNCI, GET_USER_LOGGED, GET_COMMENTI, GET_DETTAGLIO } from "../actions";
+import { GET_ANNUNCI, GET_USER_LOGGED, GET_DETTAGLIO } from "../actions";
 
 const initialState = {
   annunci: [],
   user: null,
   annuncio: null,
-  commenti: [],
   preferiti: [],
 };
 
@@ -24,11 +23,6 @@ const homeReducer = (state = initialState, action) => {
       return {
         ...state,
         annuncio: action.payload,
-      };
-    case GET_COMMENTI:
-      return {
-        ...state,
-        commenti: action.payload,
       };
 
     default:

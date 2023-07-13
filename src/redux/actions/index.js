@@ -4,6 +4,7 @@ export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
+export const ADD_COMMENTO = "ADD_COMMENTO";
 export const aggiungiValutazioneAction = (userEmail, annuncioId, punteggio) => {
   return {
     type: "valutazione/AGGIUNGI_VALUTAZIONE",
@@ -80,7 +81,6 @@ export const getDettagioAction = (url) => {
 export const getCommentiAction = (nomeAnnuncio) => {
   const url = `http://localhost:3001/commenti/nomeAnnuncio?nomeAnnuncio=${nomeAnnuncio}`;
   const token = localStorage.getItem("token");
-  console.log(token);
   return async (dispatch) => {
     try {
       let resp = await fetch(url, {
@@ -95,6 +95,31 @@ export const getCommentiAction = (nomeAnnuncio) => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const aggiungiCommentoAction = (payload) => {
+  const url = `http://localhost:3001/commenti`;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let commento = await response.json();
+
+        dispatch({ type: ADD_COMMENTO, payload: commento });
+        dispatch(getCommentiAction(payload.nomeAnnuncio));
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 };

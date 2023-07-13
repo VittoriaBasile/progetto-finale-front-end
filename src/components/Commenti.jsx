@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 
 const Commenti = ({ annuncio }) => {
   const commenti = useSelector((state) => state.commenti);
-  console.log(commenti);
   const dispatch = useDispatch();
   const formatNomeAnnuncio = (nome) => {
     return nome.replaceAll("-", " ");

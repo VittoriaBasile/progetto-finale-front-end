@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { aggiungiValutazioneAction } from "../redux/actions";
 import Commenti from "./Commenti";
+import MyCommento from "./MyCommento";
 
 const CommentArea = ({ annuncio }) => {
   const dispatch = useDispatch();
@@ -67,9 +68,10 @@ const CommentArea = ({ annuncio }) => {
   return (
     <>
       <Row>
+        <h4>Valutazione</h4>
+      </Row>
+      <Row>
         <Col>
-          <h4>Valutazione</h4>
-
           <div className="valutazione-stelle d-flex align-items-center mb-4">
             <span className="fs-4 me-3 fw-light">Invia la tua valutazione:</span>
 
@@ -115,6 +117,9 @@ const CommentArea = ({ annuncio }) => {
             ></span>
           </div>
         </Col>
+      </Row>
+      <Row>
+        <MyCommento annuncio={annuncio} />
       </Row>
       <Row>
         <Commenti annuncio={annuncio} />
