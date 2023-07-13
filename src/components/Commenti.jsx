@@ -1,4 +1,4 @@
-import { Alert, Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getCommentiAction } from "../redux/actions";
 import { useEffect } from "react";

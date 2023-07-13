@@ -1,26 +1,36 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import VillaAnna1 from "../assets/VillaAnna/VillaAnna1.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createSelector } from "reselect";
+import { useEffect, useState } from "react";
+import { getValutazioniPerAnnuncioAction } from "../redux/actions";
 
 const Annuncio = ({ annuncio }) => {
+  const dispatch = useDispatch();
+  const [valutazioni, setValutazioni] = useState([]);
+
   const formattedTipologia = annuncio.tipologia.replace(/_/g, " ");
   const formattedNome = annuncio.nome.replace(/-/g, " ");
 
-  const valutazioniSelector = (state) => state.valutazione;
+  useEffect(() => {
+    const fetchValutazioni = async () => {
+      try {
+        const response = await dispatch(getValutazioniPerAnnuncioAction(annuncio.nome));
+        const valutazioniData = await response.json();
+        setValutazioni(valutazioniData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  const valutazioniAnnuncioSelector = createSelector(
-    valutazioniSelector,
-    (_, props) => props.annuncio.id,
-    (valutazioni, annuncioId) => valutazioni.filter((valutazione) => valutazione.annuncioId === annuncioId)
-  );
+    fetchValutazioni();
+  }, [annuncio.nome, dispatch]);
 
-  const valutazioni = useSelector((state) => valutazioniAnnuncioSelector(state, { annuncio }));
-
+  const filteredValutazioni = valutazioni.filter((valutazione) => valutazione.annuncio?.nome === annuncio.nome);
   const mediaValutazioni =
-    valutazioni.length > 0
-      ? parseFloat((valutazioni.reduce((acc, cur) => acc + cur.punteggio, 0) / valutazioni.length).toFixed(1))
+    filteredValutazioni.length > 0
+      ? filteredValutazioni.reduce((total, valutazione) => total + valutazione.valore, 0) / filteredValutazioni.length
       : 0;
 
   return (

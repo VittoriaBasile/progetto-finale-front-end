@@ -5,6 +5,8 @@ export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
 export const ADD_COMMENTO = "ADD_COMMENTO";
+export const GET_VALUTAZIONI = "GET_VALUTAZIONI";
+export const GET_VALUTAZIONE = "GET_VALUTAZIONE";
 
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {
@@ -35,6 +37,59 @@ export const aggiungiValutazioneAction = (payload) => {
   };
 };
 
+export const getValutazioniPerAnnuncioAction = (nomeAnnuncio) => {
+  return async (dispatch) => {
+    const urlValutazione = `http://localhost:3001/valutazioni/nomeAnnuncio?nomeAnnuncio=${nomeAnnuncio}`;
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(urlValutazione, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const valutazioni = await response.json();
+        console.log(valutazioni);
+        dispatch({
+          type: GET_VALUTAZIONI,
+          payload: valutazioni,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getValutazionePerAnnuncioAndUserAction = (nomeAnnuncio, email) => {
+  return async (dispatch) => {
+    const urlValutazione = `http://localhost:3001/valutazioni/${nomeAnnuncio}/user/${email}`;
+    const token = localStorage.getItem("token");
+
+    try {
+      const response = await fetch(urlValutazione, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const valutazione = await response.json();
+        console.log(valutazione);
+        dispatch({
+          type: GET_VALUTAZIONE,
+          payload: valutazione,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:3001/users/me";
