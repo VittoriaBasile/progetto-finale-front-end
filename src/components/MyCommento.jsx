@@ -30,7 +30,7 @@ const MyCommento = ({ annuncio }) => {
   return (
     <>
       <Form onSubmit={sendCommento}>
-        <div className="position-relative w-75">
+        <div className="position-relative w-50">
           <Form.Group className="mb-3 position-relative" controlId="formBasicEmail">
             <Form.Label className="fs-5 fw-light">Lascia una recensione</Form.Label>
 
@@ -52,7 +52,7 @@ const MyCommento = ({ annuncio }) => {
           </Button>
         </div>
         {showAlert && (
-          <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible className="w-75">
+          <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible className="w-50">
             Scrivi qualcosa per inviare un commento
           </Alert>
         )}

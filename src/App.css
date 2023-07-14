@@ -105,14 +105,11 @@
 }
 
 .icona-commenti {
-  width: 74px;
+  width: 54px;
   fill: lightgray;
 }
 .commento-details {
-  line-height: 10px;
-}
-.card-commenti {
-  height: 200px;
+  line-height: 8px;
 }
 
 .btn-primary {

@@ -17,16 +17,50 @@ const Commenti = ({ annuncio }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [selectedCommentoId, setSelectedCommentoId] = useState(null);
+  const [showFullText, setShowFullText] = useState({});
+
+  const MAX_CHARACTERS = 47;
+
+  const shouldTruncateText = (commento) => {
+    return commento.bodyCommento && commento.bodyCommento.length > MAX_CHARACTERS && !showFullText[commento.id];
+  };
+
+  const truncatedText = (commento) => {
+    return shouldTruncateText(commento)
+      ? commento.bodyCommento.slice(0, MAX_CHARACTERS) + "..."
+      : commento.bodyCommento;
+  };
+
+  const handleMostraAltro = (commento) => {
+    setShowFullText((prevState) => ({
+      ...prevState,
+      [commento.id]: true,
+    }));
+  };
+
+  const handleMostraMeno = (commento) => {
+    setShowFullText((prevState) => ({
+      ...prevState,
+      [commento.id]: false,
+    }));
+  };
 
   const handleModalOpen = () => {
     setShowModal(true);
   };
+
   const handleModalClose = () => {
     setShowModal(false);
   };
 
-  const handleDeleteCommento = () => {
+  const handleDeleteCommento = (commentoId) => {
+    setSelectedCommentoId(commentoId);
     setShowAlert(true);
+  };
+
+  const handleAlertClose = () => {
+    setSelectedCommentoId(null);
   };
 
   useEffect(() => {
@@ -34,13 +68,13 @@ const Commenti = ({ annuncio }) => {
   }, [annuncio.nome, dispatch]);
 
   return (
-    <Row>
+    <Row className="w-75">
       <>
         {commenti.map((commento) => {
           if (commento.annuncio.nome === annuncio.nome) {
             return (
               <Col key={commento.id} sm={6}>
-                <Card className="card-commenti w-75 mb-3">
+                <Card className="card-commenti mb-3">
                   <Card.Body className="rounded">
                     <Row className="">
                       <Col className="d-flex justify-content-start align-items-center m-0 p-0 position-relative">
@@ -56,11 +90,11 @@ const Commenti = ({ annuncio }) => {
                           <path d="M16 .7C7.56.7.7 7.56.7 16S7.56 31.3 16 31.3 31.3 24.44 31.3 16 24.44.7 16 .7zm0 28c-4.02 0-7.6-1.88-9.93-4.81a12.43 12.43 0 0 1 6.45-4.4A6.5 6.5 0 0 1 9.5 14a6.5 6.5 0 0 1 13 0 6.51 6.51 0 0 1-3.02 5.5 12.42 12.42 0 0 1 6.45 4.4A12.67 12.67 0 0 1 16 28.7z"></path>
                         </svg>
                         <div className="commento-details">
-                          <p className="fs-4 fw-bold">{commento.user.name}</p>
+                          <p className="fs-5 fw-semibold">{commento.user.name}</p>
                           <p className="fw-light fs-6">{commento.dataInserimento}</p>
                           {commento.user.email === email && (
                             <>
-                              <Button onClick={handleModalOpen}>
+                              <Button onClick={handleModalOpen} className="button-commento">
                                 <svg
                                   fill="#352f44"
                                   xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +108,7 @@ const Commenti = ({ annuncio }) => {
                                   <path d="M21.13 2.86a3 3 0 00-4.17 0l-13 13L2 22l6.19-2L21.13 7a3 3 0 000-4.16zM6.77 18.57l-1.35-1.34L16.64 6 18 7.35z"></path>
                                 </svg>
                               </Button>
-                              <Button onClick={handleDeleteCommento}>
+                              <Button onClick={() => handleDeleteCommento(commento.id)} className="button-commento">
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   fill="#352f44"
@@ -94,13 +128,35 @@ const Commenti = ({ annuncio }) => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="fs-5">
-                        <p className="text-truncate">{commento.bodyCommento}</p>
+                      <Col className="">
+                        <p className="fs-6">
+                          {shouldTruncateText(commento) ? truncatedText(commento) : commento.bodyCommento}
+                        </p>
+                        {shouldTruncateText(commento) && (
+                          <Button
+                            variant="link"
+                            className="text-decoration-none "
+                            onClick={() => handleMostraAltro(commento)}
+                          >
+                            Mostra altro
+                          </Button>
+                        )}
+                        {showFullText[commento.id] && (
+                          <Button
+                            variant="link"
+                            className="text-decoration-none"
+                            onClick={() => handleMostraMeno(commento)}
+                          >
+                            Mostra meno
+                          </Button>
+                        )}
                       </Col>
                     </Row>
                   </Card.Body>
                 </Card>
-                {showAlert && <EliminaCommento commento={commento} />}
+                {showAlert && selectedCommentoId === commento.id && (
+                  <EliminaCommento onHide={handleAlertClose} commento={commento} />
+                )}
               </Col>
             );
           }
