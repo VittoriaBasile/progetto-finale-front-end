@@ -8,6 +8,8 @@ export const ADD_COMMENTO = "ADD_COMMENTO";
 export const GET_VALUTAZIONI = "GET_VALUTAZIONI";
 export const GET_VALUTAZIONE = "GET_VALUTAZIONE";
 export const GET_VALUTAZIONE_MEDIA = "GET_VALUTAZIONE_MEDIA";
+export const MODIFICA_COMMENTO = "MODIFICA_COMMENTO";
+export const ELIMINA_COMMENTO = "ELIMINA_COMMENTO";
 
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {
@@ -168,7 +170,7 @@ export const getCommentiAction = (nomeAnnuncio) => {
         if (commenti.length === 0) {
           commenti = [];
         }
-        console.log(commenti);
+
         dispatch({ type: GET_COMMENTI, payload: commenti });
       } else if (resp.status === 404) {
         dispatch({ type: GET_COMMENTI, payload: [] });
@@ -197,6 +199,53 @@ export const aggiungiCommentoAction = (payload) => {
 
         dispatch({ type: ADD_COMMENTO, payload: commento });
         dispatch(getCommentiAction(payload.nomeAnnuncio));
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const modificaCommentoAction = (commentoId, payload) => {
+  const url = `http://localhost:3001/commenti/me/` + commentoId;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let commento = await response.json();
+
+        dispatch({ type: MODIFICA_COMMENTO, payload: commento });
+        dispatch(getCommentiAction(payload.nomeAnnuncio));
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const eliminaCommentoAction = (commento) => {
+  const url = `http://localhost:3001/commenti/me/` + commento.id;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: ELIMINA_COMMENTO, payload: commento.id });
+        dispatch(getCommentiAction(commento.annuncio.nome));
       }
     } catch (error) {
       alert(error);
