@@ -10,6 +10,8 @@ export const GET_VALUTAZIONE = "GET_VALUTAZIONE";
 export const GET_VALUTAZIONE_MEDIA = "GET_VALUTAZIONE_MEDIA";
 export const MODIFICA_COMMENTO = "MODIFICA_COMMENTO";
 export const ELIMINA_COMMENTO = "ELIMINA_COMMENTO";
+export const CREA_PRENOTAZIONE = "CREA_PRENOTAZIONE";
+export const GET_PRENOTAZIONI = "GET_PRENOTAZIONI";
 
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {
@@ -249,6 +251,50 @@ export const eliminaCommentoAction = (commento) => {
       }
     } catch (error) {
       alert(error);
+    }
+  };
+};
+
+export const creaPrenotazioneAction = (payload) => {
+  const url = `http://localhost:3001/prenotazioni`;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let prenotazione = await response.json();
+
+        dispatch({ type: CREA_PRENOTAZIONE, payload: prenotazione });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const getPrenotazioniAction = () => {
+  const url = `http://localhost:3001/prenotazioni`;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let prenotazioni = await resp.json();
+        dispatch({ type: GET_PRENOTAZIONI, payload: prenotazioni });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 };

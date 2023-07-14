@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { aggiungiValutazioneAction, getDettagioAction } from "../redux/actions";
@@ -16,6 +16,7 @@ import SelfCheckIn from "../assets/svgServizi/SelfCheckIn.svg";
 import Tv from "../assets/svgServizi/Tv.svg";
 import WiFi from "../assets/svgServizi/WiFi.svg";
 import CommentArea from "./CommentArea";
+import Prenotazione from "./Prenotazione";
 
 const AnnuncioDetails = () => {
   const servizioSvg = {
@@ -45,6 +46,16 @@ const AnnuncioDetails = () => {
 
   const dispatch = useDispatch();
   const params = useParams();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     const url = `http://localhost:3001/annunci/${params.id}`;
@@ -173,10 +184,17 @@ const AnnuncioDetails = () => {
                       ))}
                   </div>
                 </div>
+                <Col sm={3} className="offset-10">
+                  <Button className="prenota mb-5" onClick={handleModalOpen}>
+                    PRENOTA ORA
+                  </Button>
+                </Col>
                 <hr />
               </Row>
+
               <CommentArea annuncio={annuncio} />
             </Row>
+            <Prenotazione show={showModal} onHide={handleModalClose} annuncio={annuncio} />
           </Container>
         </>
       )}

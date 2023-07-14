@@ -134,3 +134,15 @@
 .btn-primary:active .send-btn {
   transform: scale(0.9);
 }
+.prenota {
+  background-color: #352f44;
+}
+.prenota:hover {
+  background-color: white;
+  color: #352f44;
+  border-color: #352f44;
+}
+
+.select-numeroOspiti {
+  width: 80px;
+}
