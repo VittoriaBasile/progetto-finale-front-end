@@ -84,7 +84,7 @@ export const getValutazionePerAnnuncioAndUserAction = (nomeAnnuncio, email) => {
 
       if (response.ok) {
         const valutazione = await response.json();
-        console.log(valutazione);
+
         dispatch({
           type: GET_VALUTAZIONE,
           payload: valutazione,
@@ -279,8 +279,8 @@ export const creaPrenotazioneAction = (payload) => {
   };
 };
 
-export const getPrenotazioniAction = () => {
-  const url = `http://localhost:3001/prenotazioni`;
+export const getPrenotazioniPerDataInizioAndAnnuncioAction = (nomeAnnuncio) => {
+  const url = `http://localhost:3001/prenotazioni/${nomeAnnuncio}`;
   const token = localStorage.getItem("token");
   return async (dispatch) => {
     try {

@@ -8,9 +8,6 @@ const prenotazioniReducer = (state = initialState, action) => {
       return action.payload;
     case CREA_PRENOTAZIONE:
       return [...state, action.payload];
-
-    /* case ELIMINA_COMMENTO:
-      return state.filter((commento) => commento.id !== action.payload);*/
     default:
       return state;
   }

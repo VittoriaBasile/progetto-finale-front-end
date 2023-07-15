@@ -146,3 +146,25 @@
 .select-numeroOspiti {
   width: 80px;
 }
+.send-btn-prenotazione {
+  background-color: #352f44;
+  color: white;
+}
+.send-btn-prenotazione:hover {
+  background-color: white;
+  color: #352f44;
+  border-color: #352f44;
+}
+
+.map {
+  height: 450px;
+}
+.alert-dismissible .btn-close {
+  display: none;
+}
+.alert-success {
+  text-align: center;
+  --bs-alert-color: #0f5132;
+  --bs-alert-bg: #d1e7dd;
+  --bs-alert-border-color: #badbcc;
+}

@@ -47,14 +47,14 @@ const AnnuncioDetails = () => {
   const dispatch = useDispatch();
   const params = useParams();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showPrenotazione, setShowPrenotazione] = useState(false);
 
-  const handleModalOpen = () => {
-    setShowModal(true);
+  const handleOpen = () => {
+    setShowPrenotazione(true);
   };
 
-  const handleModalClose = () => {
-    setShowModal(false);
+  const handleClose = () => {
+    setShowPrenotazione(false);
   };
 
   useEffect(() => {
@@ -147,9 +147,9 @@ const AnnuncioDetails = () => {
               </Row>
 
               <div>
-                <hr />
+                <hr className="mb-3" />
               </div>
-              <Row className="mt-5">
+              <Row className="">
                 <h4>Cosa troverai</h4>
 
                 <div className="d-flex flex-wrap">
@@ -185,16 +185,24 @@ const AnnuncioDetails = () => {
                   </div>
                 </div>
                 <Col sm={3} className="offset-10">
-                  <Button className="prenota mb-5" onClick={handleModalOpen}>
+                  <Button className="prenota mb-5" onClick={handleOpen}>
                     PRENOTA ORA
                   </Button>
                 </Col>
                 <hr />
+                {showPrenotazione && <Prenotazione show={handleOpen} onHide={handleClose} annuncio={annuncio} />}
               </Row>
-
+              <h4>Dove ti troverai</h4>
+              <iframe
+                src={annuncio.googleMaps}
+                className="map w-100 my-5"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+              <hr className="mb-3" />
               <CommentArea annuncio={annuncio} />
             </Row>
-            <Prenotazione show={showModal} onHide={handleModalClose} annuncio={annuncio} />
           </Container>
         </>
       )}
