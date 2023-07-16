@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { creaPrenotazioneAction, getPrenotazioniPerDataInizioAndAnnuncioAction } from "../redux/actions";
-
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 const Prenotazione = ({ annuncio, show, onHide }) => {
   const dispatch = useDispatch();
   const prenotazioni = useSelector((state) => state.prenotazioni);
@@ -28,12 +28,17 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
 
   const email = localStorage.getItem("email");
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [numeroOspiti, setNumeroOspiti] = useState(1);
   const [prenotazioneInviata, setPrenotazioneInviata] = useState(false);
 
   const formattedNome = annuncio.nome.replace(/-/g, " ");
   const handleDateChange = (data) => {
     setSelectedDate(data);
+  };
+
+  const handleEndDateChange = (data) => {
+    setSelectedEndDate(data);
   };
 
   const handleNumeroOspitiChange = (e) => {
@@ -54,9 +59,28 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
 
   const payload = {
     dataInizio: selectedDate ? formatDate(selectedDate) : null,
+    dataFine: selectedEndDate ? formatDate(selectedEndDate) : null,
     numeroOspiti: numeroOspiti,
     userEmail: email,
     nomeAnnuncio: annuncio.nome,
+  };
+
+  const calcoloTotale = () => {
+    if (selectedDate && selectedEndDate && numeroOspiti) {
+      const startDate = new Date(selectedDate);
+      const endDate = new Date(selectedEndDate);
+
+      const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
+      const numeroNotti = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+      console.log(numeroNotti);
+      const prezzoNotte = numeroOspiti * annuncio.prezzo;
+      const tassaSoggiorno = 5 * numeroOspiti;
+      const prezzoNotti = prezzoNotte * numeroNotti;
+      const totale = prezzoNotti + tassaSoggiorno;
+
+      return totale;
+    }
+    return null;
   };
 
   useEffect(() => {
@@ -81,13 +105,27 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
           <Form onSubmit={sendPrenotazione}>
             <Form.Group className="">
               <Form.Label>
-                <span className="fs-4 me-3 fw-light">Scegli la data</span>
+                <span className="fs-4 me-3 fw-light">Data Inizio</span>
               </Form.Label>
               <DatePicker
                 selected={selectedDate}
                 onChange={handleDateChange}
                 className="calendario mb-3 "
-                placeholderText="Seleziona la data"
+                placeholderText="Seleziona la data di inizio"
+                calendarClassName="custom-calendar"
+                filterDate={isDateDisabled}
+                inline
+              />
+            </Form.Group>
+            <Form.Group className="">
+              <Form.Label>
+                <span className="fs-4 me-3 fw-light">Data Fine</span>
+              </Form.Label>
+              <DatePicker
+                selected={selectedEndDate}
+                onChange={handleEndDateChange}
+                className="calendario mb-3 "
+                placeholderText="Seleziona la data di fine"
                 calendarClassName="custom-calendar"
                 filterDate={isDateDisabled}
                 inline
@@ -105,7 +143,24 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
                 {generaOpzioni(annuncio.postiLetto).map((opzione) => opzione)}
               </Form.Select>
             </Form.Group>
-
+            {selectedDate && selectedEndDate && numeroOspiti && (
+              <Row>
+                <span className="fs-4 me-3 fw-light">
+                  Totale: <span className="fw-bold">{calcoloTotale()}€</span>{" "}
+                </span>
+              </Row>
+            )}
+            <Row>
+              <PayPalScriptProvider>
+                <PayPalButtons
+                  style={{
+                    color: "silver",
+                    tagline: false,
+                    shape: "pill",
+                  }}
+                />
+              </PayPalScriptProvider>
+            </Row>
             <Row sm={3} className="d-flex flex-row justify-content-end align-items-end">
               {!prenotazioneInviata && (
                 <Button type="submit" className=" mb-3 me-5 send-btn-prenotazione">
@@ -123,8 +178,6 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
           </div>
         )}
       </Modal>
-
-      {/* Alert per la conferma della prenotazione */}
     </>
   );
 };
