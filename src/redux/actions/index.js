@@ -13,6 +13,8 @@ export const MODIFICA_COMMENTO = "MODIFICA_COMMENTO";
 export const ELIMINA_COMMENTO = "ELIMINA_COMMENTO";
 export const CREA_PRENOTAZIONE = "CREA_PRENOTAZIONE";
 export const GET_PRENOTAZIONI = "GET_PRENOTAZIONI";
+export const GET_MY_PRENOTAZIONI = "GET_MY_PRENOTAZIONI";
+export const ELIMINA_PRENOTAZIONE = "ELIMINA_PRENOTAZIONE";
 
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {
@@ -302,6 +304,48 @@ export const getPrenotazioniPerDataInizioAndAnnuncioAction = (nomeAnnuncio) => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const getMyPrenotazioniAction = () => {
+  const url = `http://localhost:3001/prenotazioni/me`;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let prenotazioni = await resp.json();
+        dispatch({ type: GET_MY_PRENOTAZIONI, payload: prenotazioni });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const eliminaPrenotazioneAction = (prenotazione) => {
+  const url = `http://localhost:3001/prenotazioni/me/` + prenotazione.id;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: ELIMINA_PRENOTAZIONE, payload: prenotazione.id });
+        dispatch(getMyPrenotazioniAction());
+      }
+    } catch (error) {
+      alert(error);
     }
   };
 };

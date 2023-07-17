@@ -27,6 +27,7 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
   };
 
   const email = localStorage.getItem("email");
+  console.log(email);
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [numeroOspiti, setNumeroOspiti] = useState(1);

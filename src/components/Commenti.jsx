@@ -68,13 +68,13 @@ const Commenti = ({ annuncio }) => {
   }, [annuncio.nome, dispatch]);
 
   return (
-    <Row className="w-75">
+    <Row className="w-75 mt-5">
       <>
         {commenti.map((commento) => {
           if (commento.annuncio.nome === annuncio.nome) {
             return (
-              <Col key={commento.id} sm={6}>
-                <Card className="card-commenti mb-3">
+              <Col key={commento.id} className="" sm={7}>
+                <Card className="card-commenti  mb-3">
                   <Card.Body className="rounded">
                     <Row className="">
                       <Col className="d-flex justify-content-start align-items-center m-0 p-0 position-relative">

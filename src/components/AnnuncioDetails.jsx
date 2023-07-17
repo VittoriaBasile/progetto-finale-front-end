@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { aggiungiValutazioneAction, getDettagioAction } from "../redux/actions";
+import { getDettagioAction } from "../redux/actions";
 import VillaAnna1 from "../assets/VillaAnna/VillaAnna1.jpg";
 import VillaAnna3 from "../assets/VillaAnna/VillaAnna3.jpg";
 import VillaAnna5 from "../assets/VillaAnna/VillaAnna5.jpg";
@@ -152,7 +152,7 @@ const AnnuncioDetails = () => {
               <Row className="">
                 <h4>Cosa troverai</h4>
 
-                <div className="d-flex flex-wrap">
+                <div className="d-flex flex-wrap mt-3">
                   <div className="w-50">
                     {annuncio.servizi
                       .filter((servizio) => servizioSvg.hasOwnProperty(servizio.toUpperCase()))

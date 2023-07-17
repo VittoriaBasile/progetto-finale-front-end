@@ -44,10 +44,11 @@
 }
 .custom-card {
   line-height: 10px;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
 }
 .custom-card:hover {
   transform: translate3d(0, -2px, 0);
-  box-shadow: 0 2px 4px rgba(53, 47, 68, 0.5);
+  box-shadow: 4px 4px 8px rgba(53, 47, 68, 0.3);
 }
 
 .card-img-dettaglio {
@@ -136,11 +137,13 @@
 }
 .prenota {
   background-color: #352f44;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
 }
 .prenota:hover {
   background-color: white;
   color: #352f44;
   border-color: #352f44;
+  box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
 }
 
 .select-numeroOspiti {
@@ -149,22 +152,43 @@
 .send-btn-prenotazione {
   background-color: #352f44;
   color: white;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
 }
 .send-btn-prenotazione:hover {
   background-color: white;
   color: #352f44;
   border-color: #352f44;
+  box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
 }
 
 .map {
   height: 450px;
 }
-.alert-dismissible .btn-close {
-  display: none;
-}
+
 .alert-success {
   text-align: center;
   --bs-alert-color: #0f5132;
   --bs-alert-bg: #d1e7dd;
   --bs-alert-border-color: #badbcc;
+}
+.card-myPrenotazione {
+  height: 230px;
+  border-color: #352f44;
+  border-width: 1px;
+  border-radius: 30px;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
+}
+.card-myPrenotazione:hover {
+  transform: translateY(-5px);
+  box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
+}
+.card-commenti {
+  border-color: none;
+  border-width: 1px;
+  border-radius: 30px;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
+}
+.input-commento {
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px rgba(53, 47, 68, 0.3);
 }

@@ -35,7 +35,7 @@ const MyCommento = ({ annuncio }) => {
             <Form.Label className="fs-5 fw-light">Lascia una recensione</Form.Label>
 
             <Form.Control
-              className="position-relative"
+              className="position-relative input-commento "
               as="textarea"
               placeholder="Scrivi"
               value={commento}
