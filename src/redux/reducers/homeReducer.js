@@ -1,8 +1,7 @@
-import { GET_ANNUNCI, GET_DETTAGLIO } from "../actions";
+import { ADD_TO_PREFERITI, GET_ANNUNCI, GET_DETTAGLIO, REMOVE_FROM_PREFERITI } from "../actions";
 
 const initialState = {
   annunci: [],
-
   annuncio: null,
   preferiti: [],
 };
@@ -20,7 +19,17 @@ const homeReducer = (state = initialState, action) => {
         ...state,
         annuncio: action.payload,
       };
+    case ADD_TO_PREFERITI:
+      return {
+        ...state,
+        preferiti: [...state.preferiti, action.payload],
+      };
 
+    case REMOVE_FROM_PREFERITI:
+      return {
+        ...state,
+        preferiti: state.preferiti.filter((annuncio) => annuncio.id !== action.payload),
+      };
     default:
       return state;
   }

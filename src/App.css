@@ -65,6 +65,11 @@
   overflow-y: hidden;
   padding: 2px;
 }
+.preferito {
+  width: 24px;
+  fill: aliceblue;
+  z-index: 9999;
+}
 
 .icona-dettaglio {
   width: 100px;

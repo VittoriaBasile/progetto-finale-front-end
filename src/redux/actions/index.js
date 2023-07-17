@@ -16,6 +16,20 @@ export const GET_PRENOTAZIONI = "GET_PRENOTAZIONI";
 export const GET_MY_PRENOTAZIONI = "GET_MY_PRENOTAZIONI";
 export const ELIMINA_PRENOTAZIONE = "ELIMINA_PRENOTAZIONE";
 
+export const addToPreferitiAction = (annuncio) => {
+  return {
+    type: ADD_TO_PREFERITI,
+    payload: annuncio,
+  };
+};
+
+export const removeFromPreferitiAction = (annuncioId) => {
+  return {
+    type: REMOVE_FROM_PREFERITI,
+    payload: annuncioId,
+  };
+};
+
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {
     const urlValutazione = `http://localhost:3001/valutazioni`;

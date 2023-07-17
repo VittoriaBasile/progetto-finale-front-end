@@ -1,4 +1,4 @@
-import { Alert, Col, Container, Row, Toast } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import Annuncio from "./Annuncio";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,7 +33,7 @@ const Home = () => {
           </Row>
         </>
       ) : (
-        <Alert className="display-3 text-center">Loggati o registrati per visualizzare gli annunci!</Alert>
+        <Alert className="display-6 mt-3 text-center">Loggati o registrati per visualizzare gli annunci!</Alert>
       )}
     </Container>
   );
