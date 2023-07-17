@@ -69,7 +69,7 @@ const Annuncio = ({ annuncio }) => {
           <svg
             style={
               isPreferito
-                ? { fill: "red", stroke: "black", strokeWidth: "3px" }
+                ? { fill: "red", stroke: "white", strokeWidth: "3px" }
                 : { fill: "white", stroke: "black", strokeWidth: "3px" }
             }
             xmlns="http://www.w3.org/2000/svg"
