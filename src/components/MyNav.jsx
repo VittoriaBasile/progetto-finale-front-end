@@ -4,8 +4,31 @@ import { Link, useLocation } from "react-router-dom";
 import logo_epic_bnb2 from "../assets/logo_epic_bnb2.png";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../redux/actions";
+import { useEffect, useState } from "react";
 function MyNav() {
   const location = useLocation();
+  const user = useSelector((state) => state.user);
+
+  const [showLogin, setShowLogin] = useState(true);
+
+  useEffect(() => {
+    if (user == null) {
+      setShowLogin(true);
+    } else {
+      setShowLogin(false);
+    }
+  }, [user]);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutAction());
+
+    setShowLogin(true);
+  };
+
   return (
     <Navbar expand="lg" className="navbar" data-bs-theme="dark">
       <Container fluid>
@@ -18,10 +41,11 @@ function MyNav() {
           </Col>
           {location.pathname !== "/login" &&
             location.pathname !== "/register" &&
+            !location.pathname.includes("/prenotazioni/") &&
             !location.pathname.includes("/annunci/") && (
               <Col sm={5} className="d-none d-lg-block">
                 <Form className="d-flex mt-4 position-relative">
-                  <Form.Control type="search" placeholder="Cerca" className="" aria-label="Search" />
+                  <Form.Control type="search" placeholder="Cerca" className="rounded-pill" aria-label="Search" />
                   <Button className="btn-search border-0 bg-transparent position-absolute end-0">
                     <svg
                       role="img"
@@ -45,22 +69,30 @@ function MyNav() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
+              {location.pathname !== "/" && (
+                <Button variant="transparent" className="mb-2">
+                  <Link to="/" className="nav-item text-decoration-none text-light">
+                    <svg
+                      role="img"
+                      height="12"
+                      width="12"
+                      aria-hidden="true"
+                      className="me-2 nav-icon d-lg-none"
+                      viewBox="0 0 16 16"
+                      data-encore-id="icon"
+                    >
+                      <path d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z" />
+                    </svg>
+                    Home
+                  </Link>
+                </Button>
+              )}
+
               <Button variant="transparent" className="mb-2">
-                <Link to="/" className="nav-item text-decoration-none text-light">
-                  <svg
-                    role="img"
-                    height="12"
-                    width="12"
-                    aria-hidden="true"
-                    className="me-2 nav-icon d-lg-none"
-                    viewBox="0 0 16 16"
-                    data-encore-id="icon"
-                  >
-                    <path d="M11.03.47a.75.75 0 0 1 0 1.06L4.56 8l6.47 6.47a.75.75 0 1 1-1.06 1.06L2.44 8 9.97.47a.75.75 0 0 1 1.06 0z" />
-                  </svg>
-                  Home
+                <Link to="/prenotazioni/" className="nav-item text-decoration-none text-light">
+                  Prenotazioni
                 </Link>
-              </Button>{" "}
+              </Button>
               <Button
                 variant="transparent"
                 className="btn-nav d-flex flex-row text-align-center border-0 bg-transparent "
@@ -76,11 +108,21 @@ function MyNav() {
                           Registration
                         </Link>
                       </NavDropdown.Item>
-                      <NavDropdown.Item className="">
-                        <Link to="/login" className="text-decoration-none text-dark ">
-                          Login
-                        </Link>
-                      </NavDropdown.Item>
+                      {showLogin && (
+                        <NavDropdown.Item className="">
+                          <Link to="/login" className="text-decoration-none text-dark ">
+                            Login
+                          </Link>
+                        </NavDropdown.Item>
+                      )}
+                      {!showLogin && (
+                        <NavDropdown.Item className="">
+                          <Link to="/" className="text-decoration-none text-dark " onClick={handleLogout}>
+                            Logout
+                          </Link>
+                        </NavDropdown.Item>
+                      )}
+
                       <NavDropdown.Divider />
                       <Link to="#action5" className="text-decoration-none text-dark ms-3">
                         Contatti

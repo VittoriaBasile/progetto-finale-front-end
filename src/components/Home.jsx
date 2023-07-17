@@ -7,14 +7,17 @@ import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     dispatch(getUserLoggedAction());
-    dispatch(getAnnunciAction("http://localhost:3001/annunci"));
+    if (dispatch(getUserLoggedAction())) {
+      dispatch(getAnnunciAction("http://localhost:3001/annunci"));
+    }
   }, []);
 
   const annunci = useSelector((state) => state.home.annunci);
-  const user = useSelector((state) => state.home.user);
+
   return (
     <Container>
       {user !== null ? (
@@ -30,7 +33,7 @@ const Home = () => {
           </Row>
         </>
       ) : (
-        <Alert className="display-3 text-center">Loggati o registrati per visualizzare i film!</Alert>
+        <Alert className="display-3 text-center">Loggati o registrati per visualizzare gli annunci!</Alert>
       )}
     </Container>
   );

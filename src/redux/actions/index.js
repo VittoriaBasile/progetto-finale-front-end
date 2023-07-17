@@ -1,6 +1,7 @@
 export const ADD_TO_PREFERITI = "ADD_TO_PREFERITI";
 export const REMOVE_FROM_PREFERITI = "REMOVE_FROM_PREFERITI";
 export const GET_USER_LOGGED = "GET_USER_LOGGED";
+export const LOGOUT = "LOGOUT";
 export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
@@ -114,6 +115,12 @@ export const getUserLoggedAction = () => {
       console.log(error);
     }
   };
+};
+
+export const logoutAction = () => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("email");
+  return { type: LOGOUT };
 };
 export const getAnnunciAction = (url) => {
   const token = localStorage.getItem("token");

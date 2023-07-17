@@ -163,7 +163,7 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
             </Row>
             <Row sm={3} className="d-flex flex-row justify-content-end align-items-end">
               {!prenotazioneInviata && (
-                <Button type="submit" className=" mb-3 me-5 send-btn-prenotazione">
+                <Button type="submit" className=" mb-3 me-5 send-btn-prenotazione rounded-pill">
                   INVIA
                 </Button>
               )}

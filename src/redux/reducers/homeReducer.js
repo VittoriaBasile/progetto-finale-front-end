@@ -1,8 +1,8 @@
-import { GET_ANNUNCI, GET_USER_LOGGED, GET_DETTAGLIO } from "../actions";
+import { GET_ANNUNCI, GET_DETTAGLIO } from "../actions";
 
 const initialState = {
   annunci: [],
-  user: null,
+
   annuncio: null,
   preferiti: [],
 };
@@ -14,11 +14,7 @@ const homeReducer = (state = initialState, action) => {
         ...state,
         annunci: action.payload,
       };
-    case GET_USER_LOGGED:
-      return {
-        ...state,
-        user: action.payload,
-      };
+
     case GET_DETTAGLIO:
       return {
         ...state,

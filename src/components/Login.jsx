@@ -30,7 +30,7 @@ const Login = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+
         localStorage.setItem("token", data.accessToken);
 
         setLogin({
@@ -47,6 +47,7 @@ const Login = () => {
       setErrorMessage(error.message);
     }
   };
+
   return (
     <Container className="text-dark d-flex justify-content-center align-items-center">
       <Form className=" rounded p-5 mt-5 form-login" onSubmit={sendLogin}>

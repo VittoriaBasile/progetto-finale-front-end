@@ -185,7 +185,7 @@ const AnnuncioDetails = () => {
                   </div>
                 </div>
                 <Col sm={3} className="offset-10">
-                  <Button className="prenota mb-5" onClick={handleOpen}>
+                  <Button className="prenota mb-5 rounded-pill" onClick={handleOpen}>
                     PRENOTA ORA
                   </Button>
                 </Col>
