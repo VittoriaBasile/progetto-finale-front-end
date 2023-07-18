@@ -24,7 +24,7 @@ const MyAnnunci = () => {
         {annunciPerEmail.map((annuncio) => {
           return (
             <Col key={annuncio.id}>
-              <Card className="">
+              <Card className="card-myAnnuncio">
                 <Card.Body className="position-relative">
                   <Card.Title className="mb-4 ">{formatNomeAnnuncio(annuncio.nome)}</Card.Title>
                   <Button className="button-commento ">

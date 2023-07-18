@@ -240,3 +240,14 @@ input[type="number"] {
   top: 24px;
   margin-right: 70px;
 }
+
+.card-myAnnuncio {
+  border-color: #352f44;
+  border-width: 1px;
+  border-radius: 30px;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
+}
+.card-myAnnuncio:hover {
+  transform: translateY(-5px);
+  box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
+}
