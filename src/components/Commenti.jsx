@@ -1,6 +1,6 @@
 import { Alert, Button, Card, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { eliminaCommentoAction, getCommentiAction } from "../redux/actions";
+import { getCommentiAction } from "../redux/actions";
 import { useEffect, useState } from "react";
 import ModificaCommento from "./ModificaCommento";
 import EliminaCommento from "./EliminaCommento";
@@ -17,6 +17,7 @@ const Commenti = ({ annuncio }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
+  const [showAlertNoCommenti, setShowAlertNoCommenti] = useState(false);
   const [selectedCommentoId, setSelectedCommentoId] = useState(null);
   const [showFullText, setShowFullText] = useState({});
 
@@ -67,9 +68,20 @@ const Commenti = ({ annuncio }) => {
     dispatch(getCommentiAction(formatNomeAnnuncio(annuncio.nome)));
   }, [annuncio.nome, dispatch]);
 
+  useEffect(() => {
+    setShowAlertNoCommenti(commenti.length === 0);
+  }, [commenti]);
+
   return (
     <Row className="w-75 mt-5">
       <>
+        {showAlertNoCommenti && (
+          <div>
+            <Alert variant="info" className="w-50 text-center">
+              Non ci sono commenti per questo annuncio.
+            </Alert>
+          </div>
+        )}
         {commenti.map((commento) => {
           if (commento.annuncio.nome === annuncio.nome) {
             return (

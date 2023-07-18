@@ -27,7 +27,7 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
   };
 
   const email = localStorage.getItem("email");
-  console.log(email);
+
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
   const [numeroOspiti, setNumeroOspiti] = useState(1);
@@ -73,7 +73,7 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
 
       const timeDifference = Math.abs(endDate.getTime() - startDate.getTime());
       const numeroNotti = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-      console.log(numeroNotti);
+
       const prezzoNotte = numeroOspiti * annuncio.prezzo;
       const tassaSoggiorno = 5 * numeroOspiti;
       const prezzoNotti = prezzoNotte * numeroNotti;
@@ -173,9 +173,7 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
         </ModalBody>
         {prenotazioneInviata && (
           <div className="mx-2">
-            <Alert variant="success" dismissible>
-              La prenotazione è stata inviata con successo!
-            </Alert>
+            <Alert variant="success">La prenotazione è stata inviata con successo!</Alert>
           </div>
         )}
       </Modal>

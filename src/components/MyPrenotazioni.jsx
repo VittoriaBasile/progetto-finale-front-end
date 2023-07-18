@@ -31,7 +31,7 @@ const MyPrenotazioni = () => {
       <Row className="ms-2 mt-4">
         <h4>LE TUE PRENOTAZIONI</h4>
       </Row>
-      <Row className="flex-column w-50 mt-4 ms-2">
+      <Row className="flex-column w-50 mt-4 ms-2 gap-3">
         {myPrenotazioni.map((myPrenotazione) => {
           console.log(myPrenotazione);
           return (

@@ -117,7 +117,9 @@
 .commento-details {
   line-height: 8px;
 }
-
+.btn {
+  --bs-btn-border-width: 0px;
+}
 .btn-primary {
   --bs-btn-color: #fff;
   --bs-btn-bg: transparent;
@@ -196,4 +198,28 @@
 .input-commento {
   border-radius: 8px;
   box-shadow: 2px 2px 4px rgba(53, 47, 68, 0.3);
+}
+.euro {
+  top: 55%;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.send-annuncio {
+  background-color: #352f44;
+  box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
+}
+.send-annuncio:hover {
+  background-color: white;
+  color: #352f44;
+  border-color: #352f44;
+  box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
 }

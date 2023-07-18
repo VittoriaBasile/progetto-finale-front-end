@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import AnnuncioDetails from "./components/AnnuncioDetails";
 import MyPrenotazioni from "./components/MyPrenotazioni";
+import Affitta from "./components/Affitta";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/annunci/:id" element={<AnnuncioDetails />} />
         <Route path="/prenotazioni/" element={<MyPrenotazioni />} />
+        <Route path="/affitta" element={<Affitta />} />
       </Routes>
     </BrowserRouter>
   );

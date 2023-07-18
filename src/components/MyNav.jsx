@@ -39,31 +39,28 @@ function MyNav() {
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" className="navbar-toggler-icon" />
           </Col>
-          {location.pathname !== "/login" &&
-            location.pathname !== "/register" &&
-            !location.pathname.includes("/prenotazioni/") &&
-            !location.pathname.includes("/annunci/") && (
-              <Col sm={5} className="d-none d-lg-block">
-                <Form className="d-flex mt-4 position-relative">
-                  <Form.Control type="search" placeholder="Cerca" className="rounded-pill" aria-label="Search" />
-                  <Button className="btn-search border-0 bg-transparent position-absolute end-0">
-                    <svg
-                      role="img"
-                      height="19"
-                      width="19"
-                      aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      data-encore-id="icon"
-                      className="p-0"
-                    >
-                      <path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z" />
-                    </svg>
-                  </Button>
-                </Form>
-              </Col>
-            )}
+          {location.pathname === "/" && (
+            <Col sm={4} className="d-none d-lg-block">
+              <Form className="d-flex mt-4 position-relative">
+                <Form.Control type="search" placeholder="Cerca" className="rounded-pill" aria-label="Search" />
+                <Button className="btn-search border-0 bg-transparent position-absolute end-0">
+                  <svg
+                    role="img"
+                    height="19"
+                    width="19"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    data-encore-id="icon"
+                    className="p-0"
+                  >
+                    <path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z" />
+                  </svg>
+                </Button>
+              </Form>
+            </Col>
+          )}
 
-          <Col xs={3} lg={4}>
+          <Col xs={3} lg={5}>
             <Nav
               className="d-flex justify-content-end text-align-center mt-3"
               style={{ maxHeight: "100px" }}
@@ -91,6 +88,28 @@ function MyNav() {
               <Button variant="transparent" className="mb-2">
                 <Link to="/prenotazioni/" className="nav-item text-decoration-none text-light">
                   Prenotazioni
+                </Link>
+              </Button>
+              <Button variant="transparent" className="mb-2">
+                <Link to="/affitta" className="nav-item text-decoration-none text-light">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="me-2"
+                  >
+                    <path
+                      d="M11.0639 7.63177V11.1393H7.51713V13.028H11.0639V16.5356H13.0048V13.028H16.5516V11.1393H13.0048V7.63177H11.0639Z"
+                      fill="white"
+                    ></path>
+                    <path
+                      d="M13.734 0.684168C13.2611 0.240904 12.6404 0 12 0C11.3596 0 10.7389 0.240904 10.266 0.674532L0 10.7251L1.36946 12.0549L2.10837 11.3321V19.9661C2.10837 20.4094 2.29557 20.8334 2.61084 21.1418C2.92611 21.4501 3.35961 21.6332 3.81281 21.6332H20.1773C20.6305 21.6332 21.064 21.4598 21.3892 21.1418C21.7143 20.8238 21.8916 20.3998 21.8916 19.9565V11.3032L22.6305 12.0259L24 10.7251L13.734 0.684168ZM4.03941 19.7542V9.4049L11.6355 1.97542C11.6847 1.92723 11.734 1.88869 11.803 1.86942C11.8621 1.84051 11.931 1.83087 12 1.83087H12.0099C12.0788 1.83087 12.1478 1.84051 12.2069 1.86942C12.266 1.89833 12.3251 1.92723 12.3744 1.97542L19.9704 9.4049V19.7542H4.03941Z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                  Affitta
                 </Link>
               </Button>
               <Button

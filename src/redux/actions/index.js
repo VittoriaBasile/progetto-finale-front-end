@@ -15,6 +15,7 @@ export const CREA_PRENOTAZIONE = "CREA_PRENOTAZIONE";
 export const GET_PRENOTAZIONI = "GET_PRENOTAZIONI";
 export const GET_MY_PRENOTAZIONI = "GET_MY_PRENOTAZIONI";
 export const ELIMINA_PRENOTAZIONE = "ELIMINA_PRENOTAZIONE";
+export const ADD_ANNUNCIO = "ADD_ANNUNCIO";
 
 export const addToPreferitiAction = (annuncio) => {
   return {
@@ -29,7 +30,7 @@ export const removeFromPreferitiAction = (annuncioId) => {
     payload: annuncioId,
   };
 };
-
+//VALUTAZIONI
 export const aggiungiValutazioneAction = (payload) => {
   return async (dispatch) => {
     const urlValutazione = `http://localhost:3001/valutazioni`;
@@ -112,6 +113,8 @@ export const getValutazionePerAnnuncioAndUserAction = (nomeAnnuncio, email) => {
     }
   };
 };
+
+//LOGIN LOGOUT
 export const getUserLoggedAction = () => {
   const token = localStorage.getItem("token");
   const url = "http://localhost:3001/users/me";
@@ -138,6 +141,9 @@ export const logoutAction = () => {
   localStorage.removeItem("email");
   return { type: LOGOUT };
 };
+
+//ANNUNCI
+
 export const getAnnunciAction = (url) => {
   const token = localStorage.getItem("token");
 
@@ -160,7 +166,7 @@ export const getAnnunciAction = (url) => {
   };
 };
 
-export const getDettagioAction = (url) => {
+export const getDettaglioAction = (url) => {
   const token = localStorage.getItem("token");
 
   return async (dispatch) => {
@@ -180,6 +186,33 @@ export const getDettagioAction = (url) => {
   };
 };
 
+export const aggiungiAnnuncioAction = (payload) => {
+  const url = `http://localhost:3001/annunci`;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let annuncio = await response.json();
+
+        dispatch({ type: ADD_ANNUNCIO, payload: annuncio });
+        dispatch(getAnnunciAction(url));
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+//COMMENTI
+
 export const getCommentiAction = (nomeAnnuncio) => {
   const url = `http://localhost:3001/commenti/nomeAnnuncio?nomeAnnuncio=${nomeAnnuncio}`;
   const token = localStorage.getItem("token");
@@ -192,16 +225,14 @@ export const getCommentiAction = (nomeAnnuncio) => {
       });
       if (resp.ok) {
         let commenti = await resp.json();
-        if (commenti.length === 0) {
-          commenti = [];
-        }
-
         dispatch({ type: GET_COMMENTI, payload: commenti });
       } else if (resp.status === 404) {
         dispatch({ type: GET_COMMENTI, payload: [] });
+      } else {
+        throw new Error("Errore durante la richiesta dei commenti");
       }
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 };
@@ -277,6 +308,8 @@ export const eliminaCommentoAction = (commento) => {
     }
   };
 };
+
+//PRENOTAZIONI
 
 export const creaPrenotazioneAction = (payload) => {
   const url = `http://localhost:3001/prenotazioni`;

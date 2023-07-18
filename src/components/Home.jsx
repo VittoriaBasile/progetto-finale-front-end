@@ -19,7 +19,7 @@ const Home = () => {
   const annunci = useSelector((state) => state.home.annunci);
 
   return (
-    <Container>
+    <Container fluid>
       {user !== null ? (
         <>
           <Row className="row-cols-1 row-cols-md-2 row-cols-lg-4 row-gap-3">

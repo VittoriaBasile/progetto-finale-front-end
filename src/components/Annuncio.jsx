@@ -3,18 +3,13 @@ import { Link } from "react-router-dom";
 import VillaAnna1 from "../assets/VillaAnna/VillaAnna1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-  addToPreferitiAction,
-  getMediaValutazionePerAnnuncioAction,
-  getValutazioniPerAnnuncioAction,
-  removeFromPreferitiAction,
-} from "../redux/actions";
+import { addToPreferitiAction, removeFromPreferitiAction } from "../redux/actions";
 
 const Annuncio = ({ annuncio }) => {
   const dispatch = useDispatch();
   const [valutazioneMediaPerAnnuncio, setValutazioneMediaPerAnnuncio] = useState(0);
   const [isPreferito, setIsPreferito] = useState(false);
-  const preferiti = useSelector((state) => state.home.preferiti);
+  const preferiti = useSelector((state) => state.home.preferiti || []);
 
   const formattedTipologia = annuncio.tipologia.replace(/_/g, " ");
   const formattedNome = annuncio.nome.replace(/-/g, " ");
@@ -59,7 +54,7 @@ const Annuncio = ({ annuncio }) => {
     dispatch(getMediaValutazionePerAnnuncioAction(annuncio.nome));
     const isAnnuncioPreferito = preferiti.some((preferito) => preferito.id === annuncio.id);
     setIsPreferito(isAnnuncioPreferito);
-  }, [annuncio.nome, dispatch, preferiti]);
+  }, [annuncio.nome, dispatch]);
 
   return (
     <Link className="text-decoration-none text-dark" to={`/annunci/${annuncio.id}`}>
