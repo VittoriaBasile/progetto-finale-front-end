@@ -33,7 +33,6 @@ const MyPrenotazioni = () => {
       </Row>
       <Row className="flex-column w-50 mt-4 ms-2 gap-3">
         {myPrenotazioni.map((myPrenotazione) => {
-          console.log(myPrenotazione);
           return (
             <Col key={myPrenotazione.id}>
               <Card className="card-myPrenotazione">

@@ -223,3 +223,20 @@ input[type="number"] {
   border-color: #352f44;
   box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
 }
+.proprietà-annuncio {
+  display: inline-block;
+  width: 130px;
+  text-align: start;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+.valore-proprietà-annuncio {
+  margin-left: 135px;
+}
+.elimina-annuncio {
+  margin-right: 120px;
+}
+.modifica-annuncio {
+  top: 24px;
+  margin-right: 70px;
+}

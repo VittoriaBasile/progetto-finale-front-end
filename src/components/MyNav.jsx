@@ -10,6 +10,12 @@ import { useEffect, useState } from "react";
 function MyNav() {
   const location = useLocation();
   const user = useSelector((state) => state.user);
+  const prenotazioni = useSelector((state) => state.prenotazioni);
+  const annunci = useSelector((state) => state.home.annunci);
+  const email = localStorage.getItem("email");
+
+  const prenotazioniPerEmail = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);
+  const annunciPerEmail = annunci.filter((annuncio) => annuncio.user.email === email);
 
   const [showLogin, setShowLogin] = useState(true);
 
@@ -84,12 +90,21 @@ function MyNav() {
                   </Link>
                 </Button>
               )}
+              {prenotazioniPerEmail.length > 0 && (
+                <Button variant="transparent" className="mb-2">
+                  <Link to="/prenotazioni" className="nav-item text-decoration-none text-light">
+                    Prenotazioni
+                  </Link>
+                </Button>
+              )}
+              {annunciPerEmail.length > 0 && (
+                <Button variant="transparent" className="mb-2">
+                  <Link to="/annunci" className="nav-item text-decoration-none text-light">
+                    Annunci
+                  </Link>
+                </Button>
+              )}
 
-              <Button variant="transparent" className="mb-2">
-                <Link to="/prenotazioni/" className="nav-item text-decoration-none text-light">
-                  Prenotazioni
-                </Link>
-              </Button>
               <Button variant="transparent" className="mb-2">
                 <Link to="/affitta" className="nav-item text-decoration-none text-light">
                   <svg
