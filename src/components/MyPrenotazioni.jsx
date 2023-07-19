@@ -25,13 +25,15 @@ const MyPrenotazioni = () => {
 
   useEffect(() => {
     dispatch(getMyPrenotazioniAction());
-  }, [dispatch]);
+  }, [dispatch, prenotazioni]);
   return (
     <>
-      <Row className="ms-2 mt-4">
-        <h4>LE TUE PRENOTAZIONI</h4>
-      </Row>
       <Row className="flex-column w-50 mt-4 ms-2 gap-3">
+        <Row className="px-2 mt-4">
+          <Col className="mx-2">
+            <h4 className="px-0 mx-0">LE TUE PRENOTAZIONI</h4>
+          </Col>
+        </Row>
         {myPrenotazioni.map((myPrenotazione) => {
           return (
             <Col key={myPrenotazione.id}>
@@ -40,22 +42,22 @@ const MyPrenotazioni = () => {
                   <Card.Title className="mb-4 ">
                     Prenotazione per {formatNomeAnnuncio(myPrenotazione.annuncio.nome)}
                   </Card.Title>
-                  <Card.Text>
-                    <Row>
-                      <Col sm={3}>
-                        <p>Data Inizio: </p>
-                        <p>Data fine: </p>
-                        <p>Numero ospiti: </p>
-                        <p>Totale: </p>
-                      </Col>
-                      <Col sm={5}>
-                        <p className="fw-semibold">{myPrenotazione.dataInizio}</p>
-                        <p className="fw-semibold">{myPrenotazione.dataFine}</p>
-                        <p className="fw-semibold">{myPrenotazione.numeroOspiti}</p>
-                        <p className="fw-semibold">{myPrenotazione.prezzo}€</p>
-                      </Col>
-                    </Row>
-                  </Card.Text>
+
+                  <Row>
+                    <Col sm={3}>
+                      <p>Data Inizio: </p>
+                      <p>Data fine: </p>
+                      <p>Numero ospiti: </p>
+                      <p>Totale: </p>
+                    </Col>
+                    <Col sm={5}>
+                      <p className="fw-semibold">{myPrenotazione.dataInizio}</p>
+                      <p className="fw-semibold">{myPrenotazione.dataFine}</p>
+                      <p className="fw-semibold">{myPrenotazione.numeroOspiti}</p>
+                      <p className="fw-semibold">{myPrenotazione.prezzo}€</p>
+                    </Col>
+                  </Row>
+
                   <Button onClick={() => handleDeletePrenotazione(myPrenotazione.id)} className="button-commento">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

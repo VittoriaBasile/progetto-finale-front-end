@@ -64,7 +64,7 @@ const AnnuncioDetails = () => {
       {annuncio != null && (
         <>
           <Container fluid>
-            <Row className="my-2">
+            <Row className="py-2 ">
               <Col>
                 <h1>{formatNomeAnnuncio(annuncio.nome)}</h1>
               </Col>
@@ -172,7 +172,7 @@ const AnnuncioDetails = () => {
                       ))}
                   </div>
                 </div>
-                <Col sm={3} className="offset-10">
+                <Col sm={3} className="offset-8 d-flex justify-content-end">
                   <Button className="prenota mb-5 rounded-pill" onClick={handleOpen}>
                     PRENOTA ORA
                   </Button>

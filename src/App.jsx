@@ -10,6 +10,7 @@ import AnnuncioDetails from "./components/AnnuncioDetails";
 import MyPrenotazioni from "./components/MyPrenotazioni";
 import Affitta from "./components/Affitta";
 import MyAnnunci from "./components/MyAnnunci";
+import ModificaMyAnnuncio from "./components/ModificaMyAnnuncio";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/annunci/:id" element={<AnnuncioDetails />} />
         <Route path="/prenotazioni" element={<MyPrenotazioni />} />
         <Route path="/affitta" element={<Affitta />} />
+        <Route path="/affitta/:annuncioId" element={<ModificaMyAnnuncio />} />
         <Route path="/annunci" element={<MyAnnunci />} />
       </Routes>
     </BrowserRouter>

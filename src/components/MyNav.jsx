@@ -5,9 +5,10 @@ import logo_epic_bnb2 from "../assets/logo_epic_bnb2.png";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../redux/actions";
+import { getMyPrenotazioniAction, logoutAction } from "../redux/actions";
 import { useEffect, useState } from "react";
 function MyNav() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
   const prenotazioni = useSelector((state) => state.prenotazioni);
@@ -20,14 +21,13 @@ function MyNav() {
   const [showLogin, setShowLogin] = useState(true);
 
   useEffect(() => {
+    dispatch(getMyPrenotazioniAction());
     if (user == null) {
       setShowLogin(true);
     } else {
       setShowLogin(false);
     }
-  }, [user]);
-
-  const dispatch = useDispatch();
+  }, [dispatch, user]);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -158,9 +158,9 @@ function MyNav() {
                       )}
 
                       <NavDropdown.Divider />
-                      <Link to="#action5" className="text-decoration-none text-dark ms-3">
+                      <a href="#i" className="text-decoration-none text-dark ms-3">
                         Contatti
-                      </Link>
+                      </a>
                     </NavDropdown>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

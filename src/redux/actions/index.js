@@ -16,6 +16,7 @@ export const GET_PRENOTAZIONI = "GET_PRENOTAZIONI";
 export const GET_MY_PRENOTAZIONI = "GET_MY_PRENOTAZIONI";
 export const ELIMINA_PRENOTAZIONE = "ELIMINA_PRENOTAZIONE";
 export const ADD_ANNUNCIO = "ADD_ANNUNCIO";
+export const MODIFICA_ANNUNCIO = "MODIFICA_ANNUNCIO";
 
 export const addToPreferitiAction = (annuncio) => {
   return {
@@ -204,6 +205,30 @@ export const aggiungiAnnuncioAction = (payload) => {
 
         dispatch({ type: ADD_ANNUNCIO, payload: annuncio });
         dispatch(getAnnunciAction(url));
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const modificaAnnuncioAction = (annuncioId, payload) => {
+  const url = `http://localhost:3001/annunci/me/` + annuncioId;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        body: JSON.stringify(payload),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        let annuncio = await response.json();
+
+        dispatch({ type: MODIFICA_ANNUNCIO, payload: annuncio });
       }
     } catch (error) {
       alert(error);
