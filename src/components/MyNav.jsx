@@ -5,29 +5,33 @@ import logo_epic_bnb2 from "../assets/logo_epic_bnb2.png";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyPrenotazioniAction, logoutAction } from "../redux/actions";
+import { getMyAnnunciAction, getMyPrenotazioniAction, logoutAction } from "../redux/actions";
 import { useEffect, useState } from "react";
 function MyNav() {
   const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
   const prenotazioni = useSelector((state) => state.prenotazioni);
-  const annunci = useSelector((state) => state.home.annunci);
-  const email = localStorage.getItem("email");
+  const MyAnnunci = useSelector((state) => state.annunci);
+  console.log(MyAnnunci);
 
+  const email = localStorage.getItem("email");
+  console.log(email);
   const prenotazioniPerEmail = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);
-  const annunciPerEmail = annunci.filter((annuncio) => annuncio.user.email === email);
 
   const [showLogin, setShowLogin] = useState(true);
 
   useEffect(() => {
     dispatch(getMyPrenotazioniAction());
-    if (user == null) {
-      setShowLogin(true);
-    } else {
+    if (user != null) {
       setShowLogin(false);
+      if (email) {
+        dispatch(getMyAnnunciAction());
+      }
+    } else {
+      setShowLogin(true);
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, email]);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -97,14 +101,13 @@ function MyNav() {
                   </Link>
                 </Button>
               )}
-              {annunciPerEmail.length > 0 && (
+              {MyAnnunci.length > 0 && MyAnnunci[0].user.email === email && (
                 <Button variant="transparent" className="mb-2">
                   <Link to="/annunci" className="nav-item text-decoration-none text-light">
                     Annunci
                   </Link>
                 </Button>
               )}
-
               <Button variant="transparent" className="mb-2">
                 <Link to="/affitta" className="nav-item text-decoration-none text-light">
                   <svg

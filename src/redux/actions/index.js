@@ -3,6 +3,7 @@ export const REMOVE_FROM_PREFERITI = "REMOVE_FROM_PREFERITI";
 export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const LOGOUT = "LOGOUT";
 export const GET_ANNUNCI = "GET_ANNUNCI";
+export const GET_MY_ANNUNCI = "GET_MY_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
 export const ADD_COMMENTO = "ADD_COMMENTO";
@@ -17,7 +18,7 @@ export const GET_MY_PRENOTAZIONI = "GET_MY_PRENOTAZIONI";
 export const ELIMINA_PRENOTAZIONE = "ELIMINA_PRENOTAZIONE";
 export const ADD_ANNUNCIO = "ADD_ANNUNCIO";
 export const MODIFICA_ANNUNCIO = "MODIFICA_ANNUNCIO";
-
+export const ELIMINA_ANNUNCIO = "ELIMINA_ANNUNCIO";
 export const addToPreferitiAction = (annuncio) => {
   return {
     type: ADD_TO_PREFERITI,
@@ -166,6 +167,27 @@ export const getAnnunciAction = (url) => {
     }
   };
 };
+export const getMyAnnunciAction = () => {
+  const url = `http://localhost:3001/annunci/me`;
+  const token = localStorage.getItem("token");
+
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let annunci = await resp.json();
+
+        dispatch({ type: GET_MY_ANNUNCI, payload: annunci });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const getDettaglioAction = (url) => {
   const token = localStorage.getItem("token");
@@ -229,6 +251,29 @@ export const modificaAnnuncioAction = (annuncioId, payload) => {
         let annuncio = await response.json();
 
         dispatch({ type: MODIFICA_ANNUNCIO, payload: annuncio });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
+
+export const eliminaAnnuncioAction = (annuncio) => {
+  const url = `http://localhost:3001/annunci/me/` + annuncio.id;
+  const token = localStorage.getItem("token");
+  return async (dispatch) => {
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.ok) {
+        dispatch({ type: ELIMINA_ANNUNCIO, payload: annuncio.id });
+        const url = "http://localhost:3001/annunci/me";
+        dispatch(getMyAnnunciAction(url));
       }
     } catch (error) {
       alert(error);

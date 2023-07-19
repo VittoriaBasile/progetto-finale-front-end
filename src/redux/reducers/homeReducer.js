@@ -1,4 +1,11 @@
-import { ADD_ANNUNCIO, GET_ANNUNCI, GET_DETTAGLIO, MODIFICA_COMMENTO } from "../actions";
+import {
+  ADD_ANNUNCIO,
+  ELIMINA_ANNUNCIO,
+  GET_ANNUNCI,
+  GET_DETTAGLIO,
+  GET_MY_ANNUNCI,
+  MODIFICA_ANNUNCIO,
+} from "../actions";
 
 const initialState = {
   annunci: [],
@@ -13,20 +20,11 @@ const homeReducer = (state = initialState, action) => {
         annunci: action.payload,
       };
 
-    case ADD_ANNUNCIO:
-      return {
-        ...state,
-        annunci: [...state.annunci, action.payload],
-      };
-
     case GET_DETTAGLIO:
       return {
         ...state,
         annuncio: action.payload,
       };
-    case MODIFICA_COMMENTO:
-      const newState = state.annunci.map((annuncio) => (annuncio.id === action.payload.id ? action.payload : annuncio));
-      return newState;
 
     default:
       return state;

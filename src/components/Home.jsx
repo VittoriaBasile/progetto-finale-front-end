@@ -2,21 +2,20 @@ import { Alert, Col, Container, Row } from "react-bootstrap";
 import Annuncio from "./Annuncio";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getAnnunciAction, getUserLoggedAction } from "../redux/actions";
+import { getAnnunciAction, getMyAnnunciAction, getUserLoggedAction } from "../redux/actions";
 import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const annunci = useSelector((state) => state.home.annunci);
   useEffect(() => {
     dispatch(getUserLoggedAction());
     if (dispatch(getUserLoggedAction())) {
       dispatch(getAnnunciAction("http://localhost:3001/annunci"));
+      dispatch(getMyAnnunciAction());
     }
-  }, []);
-
-  const annunci = useSelector((state) => state.home.annunci);
+  }, [dispatch]);
 
   return (
     <Container fluid>
