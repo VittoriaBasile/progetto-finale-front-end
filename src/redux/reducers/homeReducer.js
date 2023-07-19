@@ -1,11 +1,4 @@
-import {
-  ADD_ANNUNCIO,
-  ELIMINA_ANNUNCIO,
-  GET_ANNUNCI,
-  GET_DETTAGLIO,
-  GET_MY_ANNUNCI,
-  MODIFICA_ANNUNCIO,
-} from "../actions";
+import { GET_ANNUNCI, GET_DETTAGLIO } from "../actions";
 
 const initialState = {
   annunci: [],
