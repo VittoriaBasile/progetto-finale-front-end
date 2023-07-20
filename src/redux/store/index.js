@@ -7,10 +7,14 @@ import prenotazioniReducer from "../reducers/prenotazioniReducer";
 import userReducer from "../reducers/userReducer";
 import annunciReducer from "../reducers/annunciReducer";
 import annunciPerFiltroReducer from "../reducers/annunciPerFiltroReducer";
+import annunciPerTipoReducer from "../reducers/annunciPerTipoReducer";
+import annunciPerPrezzoReducer from "../reducers/annunciPerPrezzoReducer";
 const rootReducer = combineReducers({
   preferiti: preferitiReducer,
   home: homeReducer,
+  annunciPerTipo: annunciPerTipoReducer,
   annunciPerFiltro: annunciPerFiltroReducer,
+  annunciPerPrezzo: annunciPerPrezzoReducer,
   annunci: annunciReducer,
   valutazione: valutazioneReducer,
   commenti: commentiReducer,

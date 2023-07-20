@@ -4,6 +4,8 @@ export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const LOGOUT = "LOGOUT";
 export const GET_ANNUNCI = "GET_ANNUNCI";
 export const GET_ANNUNCI_BY_FILTER = "GET_ANNUNCI_BY_FILTER";
+export const GET_ANNUNCI_BY_TIPO = "GET_ANNUNCI_BY_TIPO";
+export const GET_ANNUNCI_BY_PREZZO = "GET_ANNUNCI_BY_PREZZO";
 export const GET_MY_ANNUNCI = "GET_MY_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
@@ -183,6 +185,48 @@ export const getAnnunciByFilterAction = (filter) => {
         let annunci = await resp.json();
 
         dispatch({ type: GET_ANNUNCI_BY_FILTER, payload: annunci });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getAnnunciByTipologiaAction = (tipologia) => {
+  const token = localStorage.getItem("token");
+  const url = `http://localhost:3001/annunci/tipo?tipo=${tipologia}`;
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let annunci = await resp.json();
+
+        dispatch({ type: GET_ANNUNCI_BY_TIPO, payload: annunci });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getAnnunciByPrezzoAction = (min, max) => {
+  const token = localStorage.getItem("token");
+  const url = `http://localhost:3001/annunci/prezzo?prezzoMinimo=${min}&prezzoMassimo=${max}`;
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let annunci = await resp.json();
+
+        dispatch({ type: GET_ANNUNCI_BY_PREZZO, payload: annunci });
       }
     } catch (error) {
       console.log(error);
@@ -468,8 +512,8 @@ export const getMyPrenotazioniAction = () => {
   };
 };
 
-export const eliminaPrenotazioneAction = (prenotazione) => {
-  const url = `http://localhost:3001/prenotazioni/me/` + prenotazione.id;
+export const eliminaPrenotazioneAction = (prenotazioneId) => {
+  const url = `http://localhost:3001/prenotazioni/me/` + prenotazioneId;
   const token = localStorage.getItem("token");
   return async (dispatch) => {
     try {
@@ -481,7 +525,7 @@ export const eliminaPrenotazioneAction = (prenotazione) => {
         },
       });
       if (response.ok) {
-        dispatch({ type: ELIMINA_PRENOTAZIONE, payload: prenotazione.id });
+        dispatch({ type: ELIMINA_PRENOTAZIONE, payload: prenotazioneId });
         dispatch(getMyPrenotazioniAction());
       }
     } catch (error) {

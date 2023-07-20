@@ -27,10 +27,10 @@ function MyNav({ onSearch }) {
   };
 
   useEffect(() => {
-    dispatch(getMyPrenotazioniAction());
     if (user != null) {
       setShowLogin(false);
       if (email) {
+        dispatch(getMyPrenotazioniAction());
         dispatch(getMyAnnunciAction());
       }
     } else {

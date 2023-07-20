@@ -255,3 +255,15 @@ input[type="number"] {
   --bs-modal-width: 100% !important;
   width: 100% !important;
 }
+
+.tipo-struttura {
+  color: #352f44;
+  height: 130px;
+  width: 180px;
+}
+
+.tipo-struttura:hover {
+  color: #352f44;
+  box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
+  transform: translateY(-5px);
+}
