@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { creaPrenotazioneAction, getPrenotazioniPerDataInizioAndAnnuncioAction } from "../redux/actions";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 const Prenotazione = ({ annuncio, show, onHide }) => {
   const dispatch = useDispatch();
   const prenotazioni = useSelector((state) => state.prenotazioni);
@@ -151,17 +150,7 @@ const Prenotazione = ({ annuncio, show, onHide }) => {
                 </span>
               </Row>
             )}
-            <Row>
-              <PayPalScriptProvider>
-                <PayPalButtons
-                  style={{
-                    color: "silver",
-                    tagline: false,
-                    shape: "pill",
-                  }}
-                />
-              </PayPalScriptProvider>
-            </Row>
+
             <Row sm={3} className="d-flex flex-row justify-content-end align-items-end">
               {!prenotazioneInviata && (
                 <Button type="submit" className=" mb-3 me-5 send-btn-prenotazione rounded-pill">

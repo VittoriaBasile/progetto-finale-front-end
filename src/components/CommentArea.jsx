@@ -12,7 +12,14 @@ const CommentArea = ({ annuncio }) => {
   const [valutazioneInviata, setValutazioneInviata] = useState(false);
 
   const email = localStorage.getItem("email");
+  const user = useSelector((state) => state.user);
+  const prenotazioniPerUser = user.prenotazioni || [];
 
+  const prenotazioniConAnnuncioCorrispondente =
+    prenotazioniPerUser.length > 0
+      ? prenotazioniPerUser.filter((prenotazione) => prenotazione.annuncio.id === annuncio.id)
+      : [];
+  console.log(prenotazioniConAnnuncioCorrispondente);
   useEffect(() => {
     dispatch(getValutazionePerAnnuncioAndUserAction(annuncio.nome, email));
   }, [annuncio.nome, dispatch]);
@@ -114,7 +121,11 @@ const CommentArea = ({ annuncio }) => {
       <Row>
         <MyCommento annuncio={annuncio} />
       </Row>
+
       <Row>
+        <Row>
+          <h4>Commenti</h4>
+        </Row>
         <Commenti annuncio={annuncio} />
       </Row>
     </>
