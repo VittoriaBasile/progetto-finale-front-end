@@ -7,19 +7,24 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyAnnunciAction, getMyPrenotazioniAction, logoutAction } from "../redux/actions";
 import { useEffect, useState } from "react";
-function MyNav() {
+function MyNav({ onSearch }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
   const prenotazioni = useSelector((state) => state.prenotazioni);
   const MyAnnunci = useSelector((state) => state.annunci);
-  console.log(MyAnnunci);
 
   const email = localStorage.getItem("email");
-  console.log(email);
   const prenotazioniPerEmail = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);
 
   const [showLogin, setShowLogin] = useState(true);
+  const [filter, setFilter] = useState("");
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    setFilter(value);
+
+    onSearch(value);
+  };
 
   useEffect(() => {
     dispatch(getMyPrenotazioniAction());
@@ -52,20 +57,14 @@ function MyNav() {
           {location.pathname === "/" && (
             <Col sm={4} className="d-none d-lg-block">
               <Form className="d-flex mt-4 position-relative">
-                <Form.Control type="search" placeholder="Cerca" className="rounded-pill" aria-label="Search" />
-                <Button className="btn-search border-0 bg-transparent position-absolute end-0">
-                  <svg
-                    role="img"
-                    height="19"
-                    width="19"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-encore-id="icon"
-                    className="p-0"
-                  >
-                    <path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.28-9.407-9.28zm-7.407 9.279c0-4.006 3.302-7.28 7.407-7.28s7.407 3.274 7.407 7.28-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.28z" />
-                  </svg>
-                </Button>
+                <Form.Control
+                  type="search"
+                  placeholder="Cerca"
+                  className="rounded-pill"
+                  aria-label="Search"
+                  value={filter}
+                  onChange={handleFilterChange}
+                />
               </Form>
             </Col>
           )}

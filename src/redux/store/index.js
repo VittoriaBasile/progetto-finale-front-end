@@ -6,9 +6,11 @@ import commentiReducer from "../reducers/commentiReducer";
 import prenotazioniReducer from "../reducers/prenotazioniReducer";
 import userReducer from "../reducers/userReducer";
 import annunciReducer from "../reducers/annunciReducer";
+import annunciPerFiltroReducer from "../reducers/annunciPerFiltroReducer";
 const rootReducer = combineReducers({
   preferiti: preferitiReducer,
   home: homeReducer,
+  annunciPerFiltro: annunciPerFiltroReducer,
   annunci: annunciReducer,
   valutazione: valutazioneReducer,
   commenti: commentiReducer,

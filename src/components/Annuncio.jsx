@@ -59,7 +59,7 @@ const Annuncio = ({ annuncio }) => {
   return (
     <Link className="text-decoration-none text-dark" to={`/annunci/${annuncio.id}`}>
       <Card className="border-0 mt-3 custom-card position-relative">
-        <Card.Img variant="top" className="rounded" src={VillaAnna1} />
+        <Card.Img variant="top" className="rounded" src={annuncio.image[0]} />
         <Button onClick={handlePreferitoClick}>
           <svg
             style={

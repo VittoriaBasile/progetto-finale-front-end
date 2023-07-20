@@ -3,6 +3,7 @@ export const REMOVE_FROM_PREFERITI = "REMOVE_FROM_PREFERITI";
 export const GET_USER_LOGGED = "GET_USER_LOGGED";
 export const LOGOUT = "LOGOUT";
 export const GET_ANNUNCI = "GET_ANNUNCI";
+export const GET_ANNUNCI_BY_FILTER = "GET_ANNUNCI_BY_FILTER";
 export const GET_MY_ANNUNCI = "GET_MY_ANNUNCI";
 export const GET_DETTAGLIO = "GET_DETTAGLIO";
 export const GET_COMMENTI = "GET_COMMENTI";
@@ -167,6 +168,28 @@ export const getAnnunciAction = (url) => {
     }
   };
 };
+
+export const getAnnunciByFilterAction = (filter) => {
+  const token = localStorage.getItem("token");
+  const url = `http://localhost:3001/annunci/filter?filter=${filter}`;
+  return async (dispatch) => {
+    try {
+      let resp = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.ok) {
+        let annunci = await resp.json();
+
+        dispatch({ type: GET_ANNUNCI_BY_FILTER, payload: annunci });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
 export const getMyAnnunciAction = () => {
   const url = `http://localhost:3001/annunci/me`;
   const token = localStorage.getItem("token");

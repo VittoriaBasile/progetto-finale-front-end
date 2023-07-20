@@ -11,13 +11,20 @@ import MyPrenotazioni from "./components/MyPrenotazioni";
 import Affitta from "./components/Affitta";
 import MyAnnunci from "./components/MyAnnunci";
 import ModificaMyAnnuncio from "./components/ModificaMyAnnuncio";
+import { useState } from "react";
 
 function App() {
+  const [searchByFilter, setSearchByFilter] = useState("");
+
+  const handleSearch = (filter) => {
+    setSearchByFilter(filter);
+  };
+
   return (
     <BrowserRouter>
-      <MyNav />
+      <MyNav onSearch={handleSearch} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home searchByFilter={searchByFilter} />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/annunci/:id" element={<AnnuncioDetails />} />
