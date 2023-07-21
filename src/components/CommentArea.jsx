@@ -13,7 +13,7 @@ const CommentArea = ({ annuncio }) => {
 
   const email = localStorage.getItem("email");
   const user = useSelector((state) => state.user);
-  console.log(user);
+
   const prenotazioniPerUser = user.prenotazioni || [];
 
   const prenotazioniConAnnuncioCorrispondente =
@@ -24,7 +24,7 @@ const CommentArea = ({ annuncio }) => {
           return isAnnuncioMatch && isDataFineBeforeToday;
         })
       : [];
-  console.log(prenotazioniConAnnuncioCorrispondente);
+
   useEffect(() => {
     dispatch(getValutazionePerAnnuncioAndUserAction(annuncio.nome, email));
   }, [annuncio.nome, dispatch]);
