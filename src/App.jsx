@@ -12,6 +12,7 @@ import Affitta from "./components/Affitta";
 import MyAnnunci from "./components/MyAnnunci";
 import ModificaMyAnnuncio from "./components/ModificaMyAnnuncio";
 import { useState } from "react";
+import Footer from "./components/Footer";
 
 function App() {
   const [searchByFilter, setSearchByFilter] = useState("");
@@ -33,6 +34,7 @@ function App() {
         <Route path="/affitta/:annuncioId" element={<ModificaMyAnnuncio />} />
         <Route path="/annunci" element={<MyAnnunci />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -156,7 +156,10 @@ function MyNav({ onSearch }) {
                       )}
 
                       <NavDropdown.Divider />
-                      <a href="#i" className="text-decoration-none text-dark ms-3">
+                      <a
+                        className="text-decoration-none text-dark ms-3"
+                        href="https://github.com/VittoriaBasile/progetto-finale-front-end"
+                      >
                         Contatti
                       </a>
                     </NavDropdown>
