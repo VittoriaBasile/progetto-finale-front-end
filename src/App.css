@@ -267,9 +267,3 @@ input[type="number"] {
   box-shadow: 7px 4px 8px rgba(53, 47, 68, 0.3);
   transform: translateY(-5px);
 }
-
-.logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

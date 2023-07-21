@@ -1,18 +1,17 @@
-<div class="logo-container">
-  <img src="./src/assets/logo_epic_bnb2.png" alt="Epic BnB Logo" />
-</div>
+![Epic BnB Logo](./src/assets/logo_epic_bnb2.png)-
 
 # Sito di annunci per la prenotazione di vacanze
 
-Benvenuti su Epic BnB, il sito di annunci per la prenotazione di vacanze! Qui troverete una vasta selezione di affascinanti location per tutti i gusti, che vi permetteranno di staccare dalla routine e vivere esperienze indimenticabili.
+✈Benvenuti su Epic BnB, il sito di annunci per la prenotazione di vacanze!✈
+Qui troverete una vasta selezione di affascinanti location per tutti i gusti, che vi permetteranno di staccare dalla routine e vivere esperienze indimenticabili.
 
 ## Caratteristiche
 
-**-Esplora una vasta selezione**: Naviga tra un'ampia varietà di destinazioni e tipologie di alloggi, dalle tranquille case rurali alle lussuose ville sul mare. Scegli la destinazione perfetta per le tue prossime vacanze.
+**-Esplora una vasta selezione**: Naviga tra un'ampia varietà di destinazioni e tipologie di alloggi, dalle tranquille case rurali🏡 alle lussuose ville sul mare🌅. Scegli la destinazione perfetta per le tue prossime vacanze.
 
-**-Prenotazione semplice e veloce**: Il nostro sito ti permette di prenotare la tua vacanza in pochi e semplici passaggi. Basta indicare le date del soggiorno e il numero di ospiti, e potrai visualizzare tutte le opzioni disponibili.
+**-Prenotazione semplice e veloce**: Il nostro sito ti permette di prenotare la tua vacanza in pochi e semplici passaggi. Basta indicare le date del soggiorno📅 e il numero di ospiti, e potrai visualizzare tutte le opzioni disponibili.
 
-**-Esperienze personalizzate**: Cerca tra le diverse categorie e filtra gli annunci in base alle tue preferenze, come ad esempio piscina, vista mare e molto altro.
+**-Esperienze personalizzate**: Cerca tra le diverse categorie e filtra gli annunci in base alle tue preferenze, come ad esempio piscina🏊, vista mare🏖 e molto altro.
 
 **-Recensioni e valutazioni**: Leggi le recensioni degli altri ospiti e scopri le esperienze vissute presso le varie location. Potrai anche lasciare una tua recensione dopo il soggiorno, per aiutare altri viaggiatori nella scelta.
 
