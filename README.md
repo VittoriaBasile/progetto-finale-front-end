@@ -14,7 +14,7 @@ Qui troverete una vasta selezione di affascinanti location per tutti i gusti, ch
 
 **Esperienze personalizzate**: Cerca tra le diverse categorie e filtra gli annunci in base alle tue preferenze, come ad esempio piscina🏊, vista mare🏖 ,lago🏞, montagna🏔 e molto altro.
 
-**✅Recensioni e valutazioni**: Leggi le recensioni degli altri ospiti e scopri le esperienze vissute presso le varie location. Potrai anche lasciare una tua recensione dopo il soggiorno, per aiutare altri viaggiatori nella scelta.
+**⭐Recensioni e valutazioni**: Leggi le recensioni degli altri ospiti e scopri le esperienze vissute presso le varie location. Potrai anche lasciare una tua recensione dopo il soggiorno, per aiutare altri viaggiatori nella scelta.
 
 **🆘Assistenza clienti**: Il nostro team di supporto è sempre pronto ad aiutarti in caso di domande o necessità durante il processo di prenotazione o durante il soggiorno.
 
@@ -26,22 +26,22 @@ Questo progetto frontend è stato sviluppato utilizzando React, una libreria Jav
 
 **Per avviare il progetto in ambiente di sviluppo, segui i passaggi seguenti:**
 
-1.Assicurati di avere installato Node.js sul tuo computer.
+1.  Assicurati di avere installato Node.js sul tuo computer.
 
-2.Clona il repository da GitHub utilizzando il comando seguente:
+2.  Clona il repository da GitHub utilizzando il comando seguente:
 
 **`git clone https://github.com/VittoriaBasile/progetto-finale-front-end.git`**
 
-3.Entra nella cartella del progetto:
+3.  Entra nella cartella del progetto:
 
 **cd progetto-finale-front-end**
 
-4.Installa le dipendenze necessarie con npm:
+4.  Installa le dipendenze necessarie con npm:
 
 **npm install**
 
-5.Avvia l'app in modalità sviluppo:
+5.  Avvia l'app in modalità sviluppo:
 
 **npm start**
 
-6.Ora puoi aprire il tuo browser e visualizzare il sito all'indirizzo http://localhost:3000.
+6.  Ora puoi aprire il tuo browser e visualizzare il sito all'indirizzo http://localhost:3000.
