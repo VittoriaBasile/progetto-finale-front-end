@@ -1,4 +1,6 @@
-![Epic BnB Logo](./src/assets/logo_epic_bnb2.png)-
+<div class="logo-container">
+  <img src="./src/assets/logo_epic_bnb2.png" alt="Epic BnB Logo" />
+</div>
 
 # Sito di annunci per la prenotazione di vacanze
 
