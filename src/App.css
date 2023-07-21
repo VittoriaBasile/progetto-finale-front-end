@@ -42,6 +42,10 @@
 .navbar-toggler-icon {
   filter: invert(1);
 }
+
+.img-card-annuncio {
+  height: 230px;
+}
 .custom-card {
   line-height: 10px;
   box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);

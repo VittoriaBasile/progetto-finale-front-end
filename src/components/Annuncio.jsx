@@ -35,6 +35,14 @@ const Annuncio = ({ annuncio }) => {
       }
     };
   };
+  const MAX_CHARACTERS = 10;
+  const shouldTruncateText = () => {
+    return formattedNome && formattedNome.length > MAX_CHARACTERS;
+  };
+
+  const truncatedText = () => {
+    return shouldTruncateText(formattedNome) ? formattedNome.slice(0, MAX_CHARACTERS) + "..." : formattedNome;
+  };
 
   const handlePreferitoClick = (e) => {
     e.preventDefault();
@@ -58,7 +66,7 @@ const Annuncio = ({ annuncio }) => {
   return (
     <Link className="text-decoration-none text-dark" to={`/annunci/${annuncio.id}`}>
       <Card className="border-0 mt-3 custom-card position-relative">
-        <Card.Img variant="top" className="rounded" src={annuncio.image[0]} />
+        <Card.Img variant="top" className="rounded img-card-annuncio" src={annuncio.image[0]} />
         <Button onClick={handlePreferitoClick}>
           <svg
             style={
@@ -78,7 +86,8 @@ const Annuncio = ({ annuncio }) => {
         </Button>
         <Card.Body className="px-2 py-4">
           <Card.Title className="fs-4">
-            {formattedNome}, {annuncio.indirizzo.stato}
+            <span className="text-truncate"> {truncatedText()},</span>
+            <span> {annuncio.indirizzo.stato}</span>
           </Card.Title>
           <Card.Text className="fs-6">Host {annuncio.user.name}</Card.Text>
           <Card.Text className="stella-piena-card">{valutazioneMediaPerAnnuncio}</Card.Text>
