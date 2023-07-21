@@ -7,7 +7,7 @@ import EliminaCommento from "./EliminaCommento";
 
 const Commenti = ({ annuncio }) => {
   const commenti = useSelector((state) => state.commenti);
-
+  console.log(commenti);
   const dispatch = useDispatch();
   const email = localStorage.getItem("email");
 

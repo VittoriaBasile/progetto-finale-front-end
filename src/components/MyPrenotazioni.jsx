@@ -9,7 +9,7 @@ const MyPrenotazioni = () => {
 
   const [showAlert, setShowAlert] = useState(false);
   const [selectedPrenotazioneId, setSelectedPrenotazioneId] = useState(null);
-
+  console.log(prenotazioni);
   const email = localStorage.getItem("email");
 
   const myPrenotazioni = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);

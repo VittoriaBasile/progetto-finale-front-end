@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAnnunciAction,
   getAnnunciByFilterAction,
-  getAnnunciByPrezzoAction,
   getAnnunciByTipologiaAction,
-  getMyAnnunciAction,
   getUserLoggedAction,
 } from "../redux/actions";
 import { useEffect, useState } from "react";
@@ -156,7 +154,7 @@ const Home = ({ searchByFilter }) => {
               </Button>
             </Col>
             <Col sm={2}>
-              <Button className="tipo-struttura " onClick={() => handleTipoClick("STRUTTURA_SUL_LAGO")}>
+              <Button className="tipo-struttura " onClick={() => handleTipoClick("STRUTTURA_SU_LAGO")}>
                 <div className="d-flex flex-column align-items-center">
                   <img
                     src="https://a0.muscache.com/pictures/677a041d-7264-4c45-bb72-52bff21eb6e8.jpg"

@@ -44,8 +44,8 @@ const MyAnnunci = () => {
         ) : (
           annunci.map((annuncio) => {
             return (
-              <Col key={annuncio.id}>
-                <Card className="card-myAnnuncio">
+              <Col key={annuncio.id} className="d-flex flex-column align-items-center justify-content-center">
+                <Card className="card-myAnnuncio w-75">
                   <Card.Body className="position-relative">
                     <Card.Title className="mb-4 ">{formatNomeAnnuncio(annuncio.nome)}</Card.Title>
                     <Button
@@ -88,7 +88,9 @@ const MyAnnunci = () => {
                     </p>
                     <p>
                       <span className="proprietà-annuncio">Descrizione:</span>
-                      <span className="fw-semibold">{annuncio.descrizione}</span>
+                      <span className="fw-semibold d-inline-block valore-proprietà-annuncio">
+                        {annuncio.descrizione}
+                      </span>
                     </p>
                     <p>
                       <span className="proprietà-annuncio">Prezzo per notte:</span>

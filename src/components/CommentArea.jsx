@@ -24,7 +24,7 @@ const CommentArea = ({ annuncio }) => {
           return isAnnuncioMatch && isDataFineBeforeToday;
         })
       : [];
-
+  console.log(prenotazioniConAnnuncioCorrispondente);
   useEffect(() => {
     dispatch(getValutazionePerAnnuncioAndUserAction(annuncio.nome, email));
   }, [annuncio.nome, dispatch]);

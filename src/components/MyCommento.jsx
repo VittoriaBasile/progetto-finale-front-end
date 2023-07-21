@@ -15,7 +15,7 @@ const MyCommento = ({ annuncio }) => {
     userEmail: email,
     nomeAnnuncio: annuncio.nome,
   };
-
+  console.log(payload);
   const sendCommento = (e) => {
     e.preventDefault();
     if (commento.trim() === "") {

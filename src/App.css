@@ -44,9 +44,10 @@
 }
 
 .img-card-annuncio {
-  height: 230px;
+  height: 180px;
 }
 .custom-card {
+  max-height: 360px;
   line-height: 10px;
   box-shadow: 2px 4px 8px rgba(53, 47, 68, 0.3);
 }
@@ -64,9 +65,17 @@
 }
 .prima-img-dettaglio {
   object-fit: contain;
+  overflow-y: hidden;
+}
+.prima-card-img-dettaglio {
+  height: 4800px;
+}
+.first-img-dettaglio {
+  height: 480px;
 }
 .img-dettaglio {
   overflow-y: hidden;
+  min-height: 230px;
   padding: 2px;
 }
 .preferito {

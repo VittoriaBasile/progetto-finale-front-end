@@ -74,7 +74,7 @@ const AnnuncioDetails = () => {
               <Col lg={6} className="sm-w-100 lg-w-50">
                 <Card className="prima-card-img-dettaglio h-100">
                   {annuncio.image.length > 0 && (
-                    <Card.Img variant="top" src={annuncio.image[0]} className="rounded h-100" />
+                    <Card.Img variant="top" src={annuncio.image[0]} className="rounded first-img-dettaglio" />
                   )}
                 </Card>
               </Col>
@@ -82,7 +82,7 @@ const AnnuncioDetails = () => {
                 <Row className="row-cols-1 row-cols-md-2 row-cols-lg-2  row-gap-3">
                   {annuncio.image.slice(1).map((url, index) => (
                     <Card key={index} className="card-img-dettaglio">
-                      <Card.Img variant="top" src={url} className="rounded img-dettaglio" />
+                      <Card.Img variant="top" src={url} className="rounded img-dettaglio h-100" />
                     </Card>
                   ))}
                 </Row>
