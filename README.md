@@ -48,6 +48,8 @@ Questo progetto frontend è stato sviluppato utilizzando React, una libreria Jav
 
 ## Repository del Backend
 
-Per il backend di Epic BnB, ho utilizzato [repository-backend](https://github.com/VittoriaBasile/EPIC_BNB)
+Per il backend di Epic BnB, ho utilizzato
+
+[repository-backend](https://github.com/VittoriaBasile/EPIC_BNB)🔙🔚
 
 Puoi trovare ulteriori informazioni sulle API e la gestione dei dati consultando il repository del backend.
