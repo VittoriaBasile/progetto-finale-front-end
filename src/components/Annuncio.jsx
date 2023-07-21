@@ -95,6 +95,7 @@ const Annuncio = ({ annuncio }) => {
           <Card.Text>
             <strong>{annuncio.prezzo}</strong>€ a notte{" "}
           </Card.Text>
+          <Button></Button>
         </Card.Body>
       </Card>
     </Link>
