@@ -45,3 +45,9 @@ Questo progetto frontend è stato sviluppato utilizzando React, una libreria Jav
 **npm start**
 
 6.  Ora puoi aprire il tuo browser e visualizzare il sito all'indirizzo http://localhost:3000.
+
+## Repository del Backend
+
+Per il backend di Epic BnB, ho utilizzato [repository-backend](https://github.com/VittoriaBasile/EPIC_BNB)
+
+Puoi trovare ulteriori informazioni sulle API e la gestione dei dati consultando il repository del backend.
