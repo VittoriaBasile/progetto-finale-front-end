@@ -11,7 +11,7 @@ function MyNav({ onSearch }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
-
+  console.log(user);
   const [showLogin, setShowLogin] = useState(true);
   const [filter, setFilter] = useState("");
   const handleFilterChange = (e) => {
@@ -24,10 +24,11 @@ function MyNav({ onSearch }) {
   useEffect(() => {
     if (user != null) {
       setShowLogin(false);
+      console.log(showLogin);
     } else {
       setShowLogin(true);
     }
-  }, []);
+  }, [user]);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -134,14 +135,13 @@ function MyNav({ onSearch }) {
                           Registration
                         </Link>
                       </div>
-                      {showLogin && (
+                      {showLogin ? (
                         <div className="ms-3">
                           <Link to="/login" className="text-decoration-none text-dark ">
                             Login
                           </Link>
                         </div>
-                      )}
-                      {!showLogin && (
+                      ) : (
                         <div className="ms-3">
                           <Link to="/" className="text-decoration-none text-dark " onClick={handleLogout}>
                             Logout
