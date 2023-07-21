@@ -30,7 +30,7 @@ Questo progetto frontend è stato sviluppato utilizzando React, una libreria Jav
 
 2.Clona il repository da GitHub utilizzando il comando seguente:
 
-**git clone https://github.com/VittoriaBasile/progetto-finale-front-end.git**
+**`git clone https://github.com/VittoriaBasile/progetto-finale-front-end.git`**
 
 3.Entra nella cartella del progetto:
 
