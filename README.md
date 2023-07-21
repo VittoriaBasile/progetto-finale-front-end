@@ -59,5 +59,7 @@ Puoi trovare ulteriori informazioni sulle API e la gestione dei dati consultando
 Se hai domande, suggerimenti, o hai bisogno di assistenza riguardo a Epic BnB, non esitare a contattarmi!
 
 📧 Email: **vichy.basile@gmail.com**
+
 LinkedIn : **Vittoria Basile**
+
 GitHub : **VittoriaBasile**
