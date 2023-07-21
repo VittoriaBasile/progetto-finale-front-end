@@ -34,13 +34,13 @@ const MyAnnunci = () => {
   }, []);
 
   return (
-    <Container>
+    <>
       <Row className="ms-2 mt-4">
         <h4>I TUOI ANNUNCI</h4>
       </Row>
       <Row className="flex-column  mt-4 ms-2 gap-3">
         {annunci.length === 0 ? (
-          <Alert variant="info">Non hai ancora pubblicato nessun annuncio.</Alert>
+          <Alert className="w-50">Non hai ancora pubblicato nessun annuncio.</Alert>
         ) : (
           annunci.map((annuncio) => {
             return (
@@ -162,7 +162,7 @@ const MyAnnunci = () => {
           })
         )}
       </Row>
-    </Container>
+    </>
   );
 };
 

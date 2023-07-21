@@ -30,17 +30,15 @@ const MyPrenotazioni = () => {
 
   useEffect(() => {
     dispatch(getMyPrenotazioniAction());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <Row className="flex-column w-50 mt-4 ms-2 gap-3">
         <Row className="px-2 mt-4">
-          <Col className="mx-2">
-            <h4 className="px-0 mx-0">LE TUE PRENOTAZIONI</h4>
-          </Col>
+          <h4 className="px-0 mx-0">LE TUE PRENOTAZIONI</h4>
         </Row>
         {myPrenotazioni.length == 0 ? (
-          <Alert>NON CI SONO PRENOTAZIONI</Alert>
+          <Alert>Non hai ancora effettuato alcuna prenotazione</Alert>
         ) : (
           myPrenotazioni.map((myPrenotazione) => {
             return (

@@ -11,11 +11,12 @@ function MyNav({ onSearch }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
-  const prenotazioni = useSelector((state) => state.prenotazioni);
-  const MyAnnunci = useSelector((state) => state.annunci);
+  //const prenotazioni = useSelector((state) => state.prenotazioni);
 
-  const email = localStorage.getItem("email");
-  const prenotazioniPerEmail = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);
+  //const MyAnnunci = useSelector((state) => state.annunci);
+
+  // const email = localStorage.getItem("email");
+  //const prenotazioniPerEmail = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);
 
   const [showLogin, setShowLogin] = useState(true);
   const [filter, setFilter] = useState("");
@@ -29,14 +30,10 @@ function MyNav({ onSearch }) {
   useEffect(() => {
     if (user != null) {
       setShowLogin(false);
-      if (email) {
-        dispatch(getMyPrenotazioniAction());
-        dispatch(getMyAnnunciAction());
-      }
     } else {
       setShowLogin(true);
     }
-  }, [dispatch, user, email]);
+  }, []);
 
   const handleLogout = () => {
     dispatch(logoutAction());
@@ -93,20 +90,19 @@ function MyNav({ onSearch }) {
                   </Link>
                 </Button>
               )}
-              {prenotazioniPerEmail.length > 0 && (
-                <Button variant="transparent" className="mb-2">
-                  <Link to="/prenotazioni" className="nav-item text-decoration-none text-light">
-                    Prenotazioni
-                  </Link>
-                </Button>
-              )}
-              {MyAnnunci.length > 0 && MyAnnunci[0].user.email === email && (
-                <Button variant="transparent" className="mb-2">
-                  <Link to="/annunci" className="nav-item text-decoration-none text-light">
-                    Annunci
-                  </Link>
-                </Button>
-              )}
+
+              <Button variant="transparent" className="mb-2">
+                <Link to="/prenotazioni" className="nav-item text-decoration-none text-light">
+                  Prenotazioni
+                </Link>
+              </Button>
+
+              <Button variant="transparent" className="mb-2">
+                <Link to="/annunci" className="nav-item text-decoration-none text-light">
+                  Annunci
+                </Link>
+              </Button>
+
               <Button variant="transparent" className="mb-2">
                 <Link to="/affitta" className="nav-item text-decoration-none text-light">
                   <svg
@@ -139,24 +135,24 @@ function MyNav({ onSearch }) {
                 >
                   <div className="me-2 my-0 p-0  d-flex flex-row text-align-center justify-content-center position-relative d-none d-lg-block">
                     <NavDropdown className="text-decoration-none mt-3 p-0 position-absolute " align="end">
-                      <NavDropdown.Item className="">
+                      <div className="ms-3">
                         <Link to="/register" className="text-decoration-none text-dark ">
                           Registration
                         </Link>
-                      </NavDropdown.Item>
+                      </div>
                       {showLogin && (
-                        <NavDropdown.Item className="">
+                        <div className="ms-3">
                           <Link to="/login" className="text-decoration-none text-dark ">
                             Login
                           </Link>
-                        </NavDropdown.Item>
+                        </div>
                       )}
                       {!showLogin && (
-                        <NavDropdown.Item className="">
+                        <div className="ms-3">
                           <Link to="/" className="text-decoration-none text-dark " onClick={handleLogout}>
                             Logout
                           </Link>
-                        </NavDropdown.Item>
+                        </div>
                       )}
 
                       <NavDropdown.Divider />

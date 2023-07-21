@@ -249,6 +249,10 @@ export const getMyAnnunciAction = () => {
         let annunci = await resp.json();
 
         dispatch({ type: GET_MY_ANNUNCI, payload: annunci });
+      } else if (resp.status === 404) {
+        throw new Error("Nessun annuncio trovato");
+      } else {
+        console.log("Errore durante la richiesta degli annunci");
       }
     } catch (error) {
       console.log(error);
@@ -505,6 +509,10 @@ export const getMyPrenotazioniAction = () => {
       if (resp.ok) {
         let prenotazioni = await resp.json();
         dispatch({ type: GET_MY_PRENOTAZIONI, payload: prenotazioni });
+      } else if (resp.status === 404) {
+        throw new Error("Nessuna prenotazione trovata");
+      } else {
+        console.log("Errore durante la richiesta delle prenotazioni");
       }
     } catch (error) {
       console.log(error);

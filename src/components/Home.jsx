@@ -72,7 +72,7 @@ const Home = ({ searchByFilter }) => {
         dispatch(getAnnunciByFilterAction(searchByFilter));
       } else {
         dispatch(getAnnunciAction("http://localhost:3001/annunci"));
-        dispatch(getMyAnnunciAction());
+        // dispatch(getMyAnnunciAction());
       }
     }
   }, [dispatch, searchByFilter]);
@@ -177,7 +177,7 @@ const Home = ({ searchByFilter }) => {
             </Col>
             <Col sm={6}>
               <div className="d-flex flex-row">
-                <Form.Group className="mx-2 d-flex flex-row align-items-center">
+                <Form.Group className="mx-2 d-flex flex-row align-items-center position-relative">
                   <Form.Label className="mx-2 fw-semibold">Min</Form.Label>
                   <Form.Control
                     type="number"
@@ -185,8 +185,9 @@ const Home = ({ searchByFilter }) => {
                     value={prezzoMinimo}
                     onChange={handlePrezzoMinimoChange}
                   />
+                  <span className="position-absolute end-0 me-2">€</span>
                 </Form.Group>
-                <Form.Group className="mx-2 d-flex flex-row align-items-center">
+                <Form.Group className="mx-2 d-flex flex-row align-items-center position-relative">
                   <Form.Label className="mx-2 fw-semibold">Max</Form.Label>
                   <Form.Control
                     type="number"
@@ -194,6 +195,7 @@ const Home = ({ searchByFilter }) => {
                     value={prezzoMassimo}
                     onChange={handlePrezzoMassimoChange}
                   />
+                  <span className="position-absolute end-0 me-2">€</span>
                 </Form.Group>
               </div>
             </Col>
