@@ -11,6 +11,7 @@ import {
   getUserLoggedAction,
 } from "../redux/actions";
 import { useEffect, useState } from "react";
+import Footer from "./Footer";
 
 const Home = ({ searchByFilter }) => {
   const dispatch = useDispatch();
@@ -84,7 +85,7 @@ const Home = ({ searchByFilter }) => {
   }, [tipo, dispatch]);
 
   return (
-    <Container fluid>
+    <Container fluid style={{ minHeight: "100vh", position: "relative" }}>
       {user !== null ? (
         <>
           <Row className=" mx-0 justify-content-around">
@@ -229,6 +230,7 @@ const Home = ({ searchByFilter }) => {
       ) : (
         <Alert className="display-6 mt-3 text-center">Loggati o registrati per visualizzare gli annunci!</Alert>
       )}
+      <Footer style={{ position: "sticky", bottom: 0 }} />
     </Container>
   );
 };

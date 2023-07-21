@@ -5,18 +5,12 @@ import logo_epic_bnb2 from "../assets/logo_epic_bnb2.png";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useDispatch, useSelector } from "react-redux";
-import { getMyAnnunciAction, getMyPrenotazioniAction, logoutAction } from "../redux/actions";
+import { logoutAction } from "../redux/actions";
 import { useEffect, useState } from "react";
 function MyNav({ onSearch }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const user = useSelector((state) => state.user);
-  //const prenotazioni = useSelector((state) => state.prenotazioni);
-
-  //const MyAnnunci = useSelector((state) => state.annunci);
-
-  // const email = localStorage.getItem("email");
-  //const prenotazioniPerEmail = prenotazioni.filter((prenotazione) => prenotazione.user.email === email);
 
   const [showLogin, setShowLogin] = useState(true);
   const [filter, setFilter] = useState("");
