@@ -1,6 +1,5 @@
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import VillaAnna1 from "../assets/VillaAnna/VillaAnna1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addToPreferitiAction, removeFromPreferitiAction } from "../redux/actions";
