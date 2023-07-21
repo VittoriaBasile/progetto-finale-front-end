@@ -24,27 +24,27 @@ Questo progetto frontend è stato sviluppato utilizzando React, una libreria Jav
 
 ###👨‍💻 Come iniziare
 
-Per avviare il progetto in ambiente di sviluppo, segui i passaggi seguenti:
+**Per avviare il progetto in ambiente di sviluppo, segui i passaggi seguenti:**
 
-**1.**Assicurati di avere installato Node.js sul tuo computer.
+1.Assicurati di avere installato Node.js sul tuo computer.
 
-**2.**Clona il repository da GitHub utilizzando il comando seguente:
+2.Clona il repository da GitHub utilizzando il comando seguente:
 
 **git clone https://github.com/VittoriaBasile/progetto-finale-front-end.git**
 
-**3.**Entra nella cartella del progetto:
+3.Entra nella cartella del progetto:
 
 **cd progetto-finale-front-end**
 
-**4.**Installa le dipendenze necessarie con npm:
+4.Installa le dipendenze necessarie con npm:
 
 **npm install**
 
-**5.**Avvia l'app in modalità sviluppo:
+5.Avvia l'app in modalità sviluppo:
 
 **npm start**
 
-**6.**Ora puoi aprire il tuo browser e visualizzare il sito all'indirizzo http://localhost:3000.
+6.Ora puoi aprire il tuo browser e visualizzare il sito all'indirizzo http://localhost:3000.
 
 ### `npm run build`
 
