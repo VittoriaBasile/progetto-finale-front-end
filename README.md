@@ -22,7 +22,7 @@ Qui troverete una vasta selezione di affascinanti location per tutti i gusti, ch
 
 Questo progetto frontend è stato sviluppato utilizzando React, una libreria JavaScript ampiamente utilizzata per la creazione di interfacce utente reattive e dinamiche. Abbiamo sfruttato Create React App per impostare rapidamente la struttura di base del progetto.Inoltre le funzionalità del sito sono state migliorate attraverso l' uso di Redux mentre la grafica è stata realizzata attraverso l' uso di React Bootstrap.
 
-###👨‍💻 Come iniziare
+### Come iniziare👨‍💻
 
 **Per avviare il progetto in ambiente di sviluppo, segui i passaggi seguenti:**
 
