@@ -3,6 +3,7 @@
 # Sito di annunci per la prenotazione di vacanze
 
 ✈Benvenuti su Epic BnB, il sito di annunci per la prenotazione di vacanze!✈
+
 Qui troverete una vasta selezione di affascinanti location per tutti i gusti, che vi permetteranno di staccare dalla routine e vivere esperienze indimenticabili.
 
 ## Caratteristiche
