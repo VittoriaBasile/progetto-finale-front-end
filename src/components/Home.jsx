@@ -83,7 +83,7 @@ const Home = ({ searchByFilter }) => {
   }, [tipo, dispatch]);
 
   return (
-    <Container fluid style={{ minHeight: "100vh", position: "relative" }}>
+    <Container fluid>
       {user !== null ? (
         <>
           <Row className=" mx-0 justify-content-around">
@@ -218,7 +218,7 @@ const Home = ({ searchByFilter }) => {
               ))
             ) : (
               filteredAnnunciPerTipo.map((annuncio) => (
-                <Col key={annuncio.id}>
+                <Col key={annuncio.id} style={{ position: "relative" }}>
                   <Annuncio annuncio={annuncio} />
                 </Col>
               ))
@@ -228,7 +228,9 @@ const Home = ({ searchByFilter }) => {
       ) : (
         <Alert className="display-6 mt-3 text-center">Loggati o registrati per visualizzare gli annunci!</Alert>
       )}
-      <Footer style={{ position: "sticky", bottom: 0 }} />
+      <Row className="footer-component">
+        <Footer />
+      </Row>
     </Container>
   );
 };

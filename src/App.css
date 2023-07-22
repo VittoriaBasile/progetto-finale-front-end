@@ -285,3 +285,8 @@ input[type="number"] {
   color: white;
   height: 60px;
 }
+.footer-component {
+  position: sticky;
+  bottom: 0;
+  z-index: 99999;
+}
