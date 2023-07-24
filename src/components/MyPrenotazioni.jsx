@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 const MyPrenotazioni = () => {
   const dispatch = useDispatch();
-  const prenotazioni = useSelector((state) => state.prenotazioni);
+  const prenotazioni = useSelector((state) => state.myPrenotazioni);
 
   const [showAlert, setShowAlert] = useState(false);
   const [selectedPrenotazioneId, setSelectedPrenotazioneId] = useState(null);

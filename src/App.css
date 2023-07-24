@@ -62,6 +62,7 @@
   margin-bottom: 3px;
   border: none;
   object-fit: contain;
+  max-height: 230px;
 }
 .prima-img-dettaglio {
   object-fit: contain;

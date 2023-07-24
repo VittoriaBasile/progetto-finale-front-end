@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { aggiungiValutazioneAction, getValutazionePerAnnuncioAndUserAction } from "../redux/actions";
+import {
+  aggiungiValutazioneAction,
+  getMyPrenotazioniAction,
+  getValutazionePerAnnuncioAndUserAction,
+} from "../redux/actions";
 import Commenti from "./Commenti";
 import MyCommento from "./MyCommento";
 
@@ -13,8 +17,7 @@ const CommentArea = ({ annuncio }) => {
 
   const email = localStorage.getItem("email");
   const user = useSelector((state) => state.user);
-
-  const prenotazioniPerUser = user.prenotazioni || [];
+  const prenotazioniPerUser = useSelector((state) => state.myPrenotazioni);
 
   const prenotazioniConAnnuncioCorrispondente =
     prenotazioniPerUser.length > 0
@@ -28,6 +31,10 @@ const CommentArea = ({ annuncio }) => {
   useEffect(() => {
     dispatch(getValutazionePerAnnuncioAndUserAction(annuncio.nome, email));
   }, [annuncio.nome, dispatch]);
+
+  useEffect(() => {
+    dispatch(getMyPrenotazioniAction());
+  }, [user, dispatch]);
 
   const sendValutazione = (e, numero) => {
     e.preventDefault();

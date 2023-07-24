@@ -228,7 +228,7 @@ const Home = ({ searchByFilter }) => {
       ) : (
         <Alert className="display-6 mt-3 text-center">Loggati o registrati per visualizzare gli annunci!</Alert>
       )}
-      <Row className="footer-component">
+      <Row className="footer-component ">
         <Footer />
       </Row>
     </Container>
