@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { aggiungiAnnuncioAction } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const Affitta = () => {
   const statiEuropei = [
@@ -52,6 +53,7 @@ const Affitta = () => {
   ];
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [nomeAnnuncio, setNomeAnnuncio] = useState("");
   const [prezzo, setPrezzo] = useState("");
   const [tipoAlloggio, setTipoAlloggio] = useState("");
@@ -196,10 +198,11 @@ const Affitta = () => {
     cittàIndirizzo: città,
     statoIndirizzo: stato,
   };
-  console.log(tipoAlloggio);
+
   const sendAnnuncio = (e) => {
     e.preventDefault();
     dispatch(aggiungiAnnuncioAction(payload));
+    navigate("/annunci");
   };
 
   useEffect(() => {

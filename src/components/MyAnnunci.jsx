@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Modal, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import ModificaMyAnnuncio from "./ModificaMyAnnuncio";
 import { eliminaAnnuncioAction, getMyAnnunciAction } from "../redux/actions";
@@ -8,7 +8,6 @@ const MyAnnunci = () => {
   const dispatch = useDispatch();
 
   const annunci = useSelector((state) => state.annunci);
-  console.log(annunci);
   const [showAlert, setShowAlert] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAnnuncioId, setSelectedAnnuncioId] = useState(null);
@@ -19,6 +18,9 @@ const MyAnnunci = () => {
   const handleModalOpen = (annuncio) => {
     setSelectedAnnuncio(annuncio);
     setShowModal(true);
+  };
+  const handleModalClose = () => {
+    setShowModal(false);
   };
   const handleShowAlert = (annuncio) => {
     setSelectedAnnuncio(annuncio);
@@ -140,7 +142,7 @@ const MyAnnunci = () => {
                 </Card>
                 {showAlert && selectedAnnuncioId === annuncio.id && (
                   <Alert variant="danger" className="mt-3" onClose={() => setShowAlert(false)} dismissible>
-                    <Alert.Heading>Confermi di voler eliminare la prenotazione?</Alert.Heading>
+                    <Alert.Heading>Confermi di voler eliminare l' annuncio?</Alert.Heading>
                     <Button variant="danger" onClick={() => handleDeleteAnnuncio(selectedAnnuncio)}>
                       Conferma
                     </Button>
@@ -151,13 +153,8 @@ const MyAnnunci = () => {
                     <Modal.Title>Modifica il tuo annuncio</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    <ModificaMyAnnuncio annuncio={selectedAnnuncio} />
+                    <ModificaMyAnnuncio annuncio={selectedAnnuncio} closeModal={handleModalClose} />
                   </Modal.Body>
-                  <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
-                      Close
-                    </Button>
-                  </Modal.Footer>
                 </Modal>
               </Col>
             );

@@ -3,7 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { modificaAnnuncioAction } from "../redux/actions";
 
-const ModificaMyAnnuncio = ({ annuncio }) => {
+const ModificaMyAnnuncio = ({ annuncio, closeModal }) => {
   const statiEuropei = [
     "Albania",
     "Andorra",
@@ -202,6 +202,7 @@ const ModificaMyAnnuncio = ({ annuncio }) => {
   const sendAnnuncio = (e) => {
     e.preventDefault();
     dispatch(modificaAnnuncioAction(annuncio.id, payload));
+    closeModal();
   };
 
   useEffect(() => {
